@@ -1,4 +1,16 @@
-Descrizione: Il gruppo si pone come obiettivo quello di realizzare un videogioco inspirato al 
+Email dei componenti:
+
+- filippo.patrignani2@studio.unibo.it
+
+- giovanni.perreon@studio.unibo.it
+
+- 
+
+-sofia.ricupero@studio.unibo.it
+
+VSLG: Vampire Survivors-like game
+
+Il gruppo si pone come obiettivo quello di realizzare un videogioco inspirato al 
 gioco "Vampire Survivors" un gioco dove il giocatore deve affrontare ondate continue di 
 nemici con l'obiettivo di sopravvivere il più a lungo possibile, accumulando vari potenziamenti.
 
