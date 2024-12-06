@@ -8,7 +8,7 @@ Email dei componenti:
 
 -sofia.ricupero@studio.unibo.it
 
-OOPSchat: OOP Survivors-like game
+OOPS: OOP Survivors
 
 Il gruppo si pone come obiettivo quello di realizzare un videogioco inspirato al 
 gioco "Vampire Survivors" un gioco dove il giocatore deve affrontare ondate continue di 
