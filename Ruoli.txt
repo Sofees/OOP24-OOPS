@@ -72,10 +72,10 @@ Challenge principali:
 
 Suddivisione del lavoro:
 
-1: Sviluppo delle Schermate e gestione delle meccaniche di salvataggio dei dati
+1: Sviluppo delle Schermate e gestione delle meccaniche di salvataggio dei dati e alcuni input
 
 2: Implementazione del Player e gestione degli Input
 
 3: Implementazione dei Nemici e gestione audio
 
-4: Creazione e gestione degli Items
+Patrignani: Creazione e gestione degli Items 
