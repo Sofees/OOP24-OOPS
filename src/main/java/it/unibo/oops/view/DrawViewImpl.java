@@ -20,9 +20,9 @@ public final class DrawViewImpl implements DrawView {
     private final int sh = (int) d.getHeight();
     private GameState currentGameState = GameState.TITLESTATE;
     /**
-     * 
+     * @param gameState
      */
-    public DrawViewImpl(GameState gameState) {
+    public DrawViewImpl(final GameState gameState) {
         this.changeGameState(gameState);
         this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.frame.setLocationRelativeTo(null);
