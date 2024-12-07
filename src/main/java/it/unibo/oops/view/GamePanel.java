@@ -1,0 +1,18 @@
+package it.unibo.oops.view;
+
+import java.awt.Color;
+import java.awt.Dimension;
+/**
+ * 
+ */
+public class GamePanel extends MyPanel { 
+    private static final double serialVersionUID = getSerialVersionUID();
+    /**
+     * @param screenWidth
+     * @param screenHeight
+     */
+    public GamePanel(final int screenWidth, final int screenHeight) {
+        super.setPreferredSize(new Dimension(screenWidth, screenHeight));
+        super.setBackground(Color.BLACK);
+    }
+}
