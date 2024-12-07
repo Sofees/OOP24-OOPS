@@ -22,10 +22,9 @@ public final class DrawViewImpl implements DrawView {
     /**
      * 
      */
-    public DrawViewImpl() {
+    public DrawViewImpl(GameState gameState) {
+        this.changeGameState(gameState);
         this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.frame.setContentPane(new GamePanel(sw / PROPORTION, sh / PROPORTION)); // Switch che sceglie il panel giusto
-        this.frame.pack();
         this.frame.setLocationRelativeTo(null);
         this.start();
     }
@@ -37,20 +36,22 @@ public final class DrawViewImpl implements DrawView {
 
     @Override
     public void changeGameState(final GameState gameState) {
-        this.currentGameState = gameState;
-        switch (currentGameState) {
-            case TITLESTATE -> setTitleState();
-            case TITLEOPTIONSTATE, PAUSESTATE -> setOptionState();
-            case PLAYSTATE -> setPlayState();
-            default -> throw new IllegalArgumentException();
+        if (currentGameState != gameState) {
+            this.currentGameState = gameState;
+            switch (currentGameState) {
+                case TITLESTATE -> setTitleState();
+                case TITLEOPTIONSTATE, PAUSESTATE -> setOptionState();
+                case PLAYSTATE -> setPlayState();
+                default -> throw new IllegalArgumentException();
+            }
         }
     }
     private void setTitleState() {
         this.frame.setContentPane(new TitlePanel(sw / PROPORTION, sh / PROPORTION));
         this.frame.pack();
     }
-    private void setOptionState() {  //GamePanel da sostituire con un OptionPanel
-        this.frame.setContentPane(new GamePanel(sw / PROPORTION, sh / PROPORTION));
+    private void setOptionState() {
+        this.frame.setContentPane(new GamePanel(sw / PROPORTION, sh / PROPORTION)); //GamePanel da sostituire con un OptionPanel
         this.frame.pack();
     }
     private void setPlayState() {

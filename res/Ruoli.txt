@@ -4,14 +4,14 @@ Email dei componenti:
 
 - giovanni.perreon@studio.unibo.it
 
-- 
+- vera.murgia@studio.unibo.it
 
--sofia.ricupero@studio.unibo.it
+- sofia.ricupero@studio.unibo.it
 
 OOPS: OOP Survivors
 
 Il gruppo si pone come obiettivo quello di realizzare un videogioco inspirato al 
-gioco "Vampire Survivors" un gioco dove il giocatore deve affrontare ondate continue di 
+gioco "Vampire Survivors" dove il giocatore deve affrontare ondate continue di 
 nemici con l'obiettivo di sopravvivere il più a lungo possibile, accumulando vari potenziamenti.
 
 Funzionalità minimali:
@@ -72,10 +72,10 @@ Challenge principali:
 
 Suddivisione del lavoro:
 
-1: Sviluppo delle Schermate e gestione delle meccaniche di salvataggio dei dati e alcuni input
+Murgia: Sviluppo delle Schermate e gestione delle meccaniche di salvataggio dei dati e alcuni input
 
-2: Implementazione del Player e gestione degli Input
+Ricupero: Implementazione del Player e gestione principale degli input
 
-3: Implementazione dei Nemici e gestione audio
+Perreon: Implementazione dei Nemici e gestione audio
 
 Patrignani: Creazione e gestione degli Items 

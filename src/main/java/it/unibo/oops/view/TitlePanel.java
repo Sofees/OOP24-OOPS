@@ -5,6 +5,7 @@ import java.awt.Dimension;
  * 
  */
 public class TitlePanel extends MyPanel {
+    @SuppressWarnings("unused") // TEMPORARY
     private static final double serialVersionUID = getSerialVersionUID();
     /**
      * @param screenWidth
