@@ -79,3 +79,5 @@ Ricupero: Implementazione del Player e gestione principale degli input
 Perreon: Implementazione dei Nemici e gestione audio
 
 Patrignani: Creazione e gestione degli Items 
+
+PS: Abbiamo notato la presenza di una proposta che si basa sullo stesso gioco (Vampire Survivors) che avevamo pensato, vorremmo sapere se sarebbe un problema procedere.
