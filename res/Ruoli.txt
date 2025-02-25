@@ -39,7 +39,7 @@ Funzionalità minimali:
  - Movimento
  - Direzione: (Quella del movimento)
 
-- Nemici
+- Nemici:
  - Spawning: In un cerchio attorno al player
  - Statistiche: (Vita, Attacco)
  - AI: Cammina verso il player, alcuni a volte sparano
