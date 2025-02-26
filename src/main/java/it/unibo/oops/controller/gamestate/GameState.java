@@ -18,5 +18,9 @@ public enum GameState {
     /**
      * 
      */
-    PAUSESTATE;
+    PAUSESTATE,
+    /**
+     * 
+     */
+    TESTSTATE;
 }

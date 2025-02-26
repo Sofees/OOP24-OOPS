@@ -47,6 +47,7 @@ public final class DrawViewImpl implements DrawView {
                 case TITLESTATE -> setTitleState();
                 case TITLEOPTIONSTATE, PAUSESTATE -> setOptionState();
                 case PLAYSTATE -> setPlayState();
+                case TESTSTATE -> setTestState();
                 default -> throw new IllegalArgumentException();
             }
         }
@@ -59,13 +60,20 @@ public final class DrawViewImpl implements DrawView {
     }
     private void setOptionState() {
         SwingUtilities.invokeLater(() -> {
-            this.frame.setContentPane(new GamePanel(sw / PROPORTION, sh / PROPORTION)); //GamePanel da sostituire con un OptionPanel
+            //GamePanel da sostituire con un OptionPanel
+            this.frame.setContentPane(new GamePanel(sw / PROPORTION, sh / PROPORTION));
             this.frame.pack();
         });
     }
     private void setPlayState() {
         SwingUtilities.invokeLater(() -> {
             this.frame.setContentPane(new GamePanel(sw / PROPORTION, sh / PROPORTION));
+            this.frame.pack();
+        });
+    }
+    private void setTestState() {
+        SwingUtilities.invokeLater(() -> {
+            this.frame.setContentPane(new TestPanel(sw / PROPORTION, sh / PROPORTION));
             this.frame.pack();
         });
     }
