@@ -2,8 +2,6 @@ package it.unibo.oops.view;
 
 import java.awt.Color;
 import java.awt.Dimension;
-
-import it.unibo.oops.controller.GameThread;
 /**
  * 
  */
@@ -17,6 +15,5 @@ public class GamePanel extends MyPanel {
     public GamePanel(final int screenWidth, final int screenHeight) {
         super.setPreferredSize(new Dimension(screenWidth, screenHeight));
         super.setBackground(Color.BLACK);
-        new GameThread();
     }
 }

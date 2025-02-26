@@ -8,6 +8,7 @@ final class MainApp {
 
     private MainApp(final DrawView window) {
         window.changeGameState(GameState.PLAYSTATE); // EASILY CHANGE THE PANEL HERE
+        new GameThread();
     }
     public static void main(final String[] args) {
         new MainApp(new DrawViewImpl(GameState.PLAYSTATE));

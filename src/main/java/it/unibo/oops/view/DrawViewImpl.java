@@ -1,6 +1,7 @@
 package it.unibo.oops.view;
 
 import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
 
 import it.unibo.oops.controller.gamestate.GameState;
 
@@ -23,15 +24,19 @@ public final class DrawViewImpl implements DrawView {
      * @param gameState
      */
     public DrawViewImpl(final GameState gameState) {
-        this.changeGameState(gameState);
-        this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.frame.setLocationRelativeTo(null);
-        this.start();
+        SwingUtilities.invokeLater(() -> {
+            this.changeGameState(gameState);
+            this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            this.frame.setLocationRelativeTo(null);
+            this.start();
+        });
     }
 
     @Override
     public void start() {
-        this.frame.setVisible(true);
+        SwingUtilities.invokeLater(() -> {
+            this.frame.setVisible(true);
+        });
     }
 
     @Override
@@ -47,16 +52,22 @@ public final class DrawViewImpl implements DrawView {
         }
     }
     private void setTitleState() {
-        this.frame.setContentPane(new TitlePanel(sw / PROPORTION, sh / PROPORTION));
-        this.frame.pack();
+        SwingUtilities.invokeLater(() -> {
+            this.frame.setContentPane(new TitlePanel(sw / PROPORTION, sh / PROPORTION));
+            this.frame.pack();
+        });
     }
     private void setOptionState() {
-        this.frame.setContentPane(new GamePanel(sw / PROPORTION, sh / PROPORTION)); //GamePanel da sostituire con un OptionPanel
-        this.frame.pack();
+        SwingUtilities.invokeLater(() -> {
+            this.frame.setContentPane(new GamePanel(sw / PROPORTION, sh / PROPORTION)); //GamePanel da sostituire con un OptionPanel
+            this.frame.pack();
+        });
     }
     private void setPlayState() {
-        this.frame.setContentPane(new GamePanel(sw / PROPORTION, sh / PROPORTION));
-        this.frame.pack();
+        SwingUtilities.invokeLater(() -> {
+            this.frame.setContentPane(new GamePanel(sw / PROPORTION, sh / PROPORTION));
+            this.frame.pack();
+        });
     }
     /**
      *  @return the current gameState.

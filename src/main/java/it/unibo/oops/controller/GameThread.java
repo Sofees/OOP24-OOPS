@@ -1,6 +1,7 @@
 package it.unibo.oops.controller;
 
 import java.util.logging.Logger;
+
 import java.util.logging.Level;
 
 /**
@@ -23,12 +24,17 @@ public class GameThread implements Runnable {
         thread.start();
     }
     /**
+     * Stops the gameThread.
+     */
+    public void stopThread() {
+        this.stop = false;
+    }
+    /**
      *  Thread.
      */
     @Override
     public void run() {
         while (stop) {
-            this.stop = false;
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
