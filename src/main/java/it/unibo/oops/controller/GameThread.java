@@ -1,17 +1,11 @@
 package it.unibo.oops.controller;
 
-import java.util.logging.Logger;
-import java.security.GeneralSecurityException;
-import java.util.logging.Level;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-
 /**
 * 
 */
 public class GameThread implements Runnable {
 
-    double FPS = 60.0;
+    private final double FPS = 60.0;
 
 
     private Boolean running = true;
@@ -61,6 +55,10 @@ public class GameThread implements Runnable {
 
     public void draw() {
         //chiama il draw di player, items, nemici etc.
+    }
+
+    public double getFps() {
+        return this.FPS;
     }
 
 }

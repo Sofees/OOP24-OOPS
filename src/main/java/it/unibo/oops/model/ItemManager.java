@@ -1,20 +1,29 @@
 package it.unibo.oops.model;
 
-import java.util.LinkedList;
+import java.awt.Graphics;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ItemManager {
-    List<Item> items = new LinkedList<>();
+    private List<Item> items;
 
-    public void update() {
-        for (Item item : items) {
-            item.update();
-        }
+    public ItemManager() {
+        items = new ArrayList<>();
     }
 
-    public void draw() {
-        for (Item item : items) {
+    public void addItem(Item item) {
+        items.add(item);
+    }
 
+    public void update() {
+        items.forEach(Item::update);
+    }
+
+    public void draw(Graphics g) {
+        for (Item item : items) {
+            if (item instanceof ExperienceOrb || item instanceof Weapon) {
+                ((ExperienceOrb) item).draw(g);
+            }
         }
     }
 }
