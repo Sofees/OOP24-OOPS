@@ -1,15 +1,20 @@
 package it.unibo.oops.controller;
 
 import java.util.logging.Logger;
-
+import java.security.GeneralSecurityException;
 import java.util.logging.Level;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 
 /**
 * 
 */
 public class GameThread implements Runnable {
 
-    private Boolean stop = true;
+    double FPS = 60.0;
+
+
+    private Boolean running = true;
     /**
      * 
      */
@@ -27,20 +32,35 @@ public class GameThread implements Runnable {
      * Stops the gameThread.
      */
     public void stopThread() {
-        this.stop = false;
+        this.running = false;
     }
     /**
      *  Thread.
      */
     @Override
     public void run() {
-        while (stop) {
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                Logger.getLogger(GameThread.class.getName()).log(Level.SEVERE, "Sleep Thread Error", e);
+        long lastTime = System.nanoTime();
+        double nanoFps = 1000000000 / FPS;
+        double delta = 0;
+
+        while (running) {
+            long currentTime = System.nanoTime();
+            delta += (currentTime - lastTime) / nanoFps;
+            lastTime = currentTime;
+            while (delta >= 1) {
+                update();
+                delta--;
             }
+            draw();
         }
+    }
+
+    public void update() {
+        //chiama l'update di player, items, nemici etc.
+    }
+
+    public void draw() {
+        //chiama il draw di player, items, nemici etc.
     }
 
 }
