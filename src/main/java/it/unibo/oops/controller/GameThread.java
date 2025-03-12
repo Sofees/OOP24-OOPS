@@ -1,21 +1,25 @@
 package it.unibo.oops.controller;
-import it.unibo.oops.model.Player;  
-import java.awt.Graphics;
-import java.awt.Graphics2D;
+import it.unibo.oops.model.*;
+import it.unibo.oops.view.*;
 /**
 * 
 */
 public class GameThread implements Runnable {
 
     private final double FPS = 60.0;
-    private Player player; 
+    private final GamePanel gp;
+    private final ItemManager itemManager = new ItemManager();
+    private final Player player = new Player(0,0 , 100, 5);
+
 
     private Boolean running = true;
     /**
      * 
      */
-    public GameThread() {
-        this.player = new Player(100, 100, 100, 5);
+    public GameThread(GamePanel gp) {
+        this.gp = gp;
+        gp.setPlayer(this.player);
+        gp.setItemManager(this.itemManager);
         this.startThread();
     }
     /**
@@ -48,19 +52,14 @@ public class GameThread implements Runnable {
                 update();
                 delta--;
             }
-            draw();
+            gp.repaint();
         }
     }
 
     public void update() {
         //chiama l'update di player, items, nemici etc.
+        itemManager.update();
         player.update();
-    }
-
-    public void draw(Graphics g) {
-        //chiama il draw di player, items, nemici etc.
-        Graphics2D g2d = (Graphics2D) g;
-        player.draw(g2d);
     }
 
     public double getFps() {

@@ -1,5 +1,5 @@
 package it.unibo.oops.model;
 
-public class Accessory {
-
+public abstract class Accessory extends Item {
+    public abstract void update();
 }
