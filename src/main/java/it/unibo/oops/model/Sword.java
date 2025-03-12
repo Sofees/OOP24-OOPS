@@ -6,17 +6,19 @@ public class Sword {
 
     private static final int WIDTH = 10;
     private static final int HEIGHT = 30;
-    private static final int DURATION = 30;
-    private static final int COOLDOWN = 90;
+    private static final double DURATION = 0.5;
+    private static final double COOLDOWN = 1.5;
 
-    private int timer;
-    private int cooldown;
+    private double timer;
+    private double cooldown;
     private boolean active;
+    private final Player player;
 
-    public Sword() {
+    public Sword(double fps, Player player) {
         this.active = false;
-        this.timer = 0;
-        this.cooldown = 0;
+        this.timer = fps*DURATION;
+        this.cooldown = fps*COOLDOWN;
+        this.player = player;
     }
     
     public void update() {
@@ -25,6 +27,7 @@ public class Sword {
             if (timer <= 0) {
                 active = false;
                 this.cooldown = COOLDOWN;
+                this.timer = DURATION;
             }
         } else {
             if (cooldown <= 0) {
@@ -38,8 +41,8 @@ public class Sword {
     public void draw(Graphics g) {
         if (active) {
             g.setColor(Color.BLUE);
-            int drawX = player.x, drawY = player.y;
-            switch (player.direction) {
+            int drawX = player.getX(), drawY = player.getY();
+            switch (player.getDirection()) {
                 case "UP":
                     drawX -= WIDTH / 2;
                     drawY -= HEIGHT;
@@ -56,7 +59,7 @@ public class Sword {
                     drawX -= WIDTH;
                     drawY -= HEIGHT / 2;
                     break;
-                }
+            }  
             g.fillRect(drawX, drawY, WIDTH, HEIGHT);
         }
     }
