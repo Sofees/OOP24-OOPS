@@ -14,6 +14,7 @@ public abstract class Entity {
         this.speed = speed;
         this.isAlive = true;
     }
-
+    
+    @Override
     public abstract void draw(Graphics g);
 }

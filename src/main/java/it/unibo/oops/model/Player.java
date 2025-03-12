@@ -41,17 +41,10 @@ public class Player extends Entity {
         if (RIGHT) x += speed;
     }
 
-
+    @Override
     public void draw(Graphics2D g) {
         g.setColor(Color.GREEN);    //colore rettangolo
         g.fillRect((int) x, (int) y, 50, 50);
-    }
-
-    public void update() {
-        if (UP) y -= speed;
-        if (DOWN) y += speed;
-        if (LEFT) x -= speed;
-        if (RIGHT) x += speed;
     }
 
     public double getX() {
