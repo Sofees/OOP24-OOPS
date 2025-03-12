@@ -15,7 +15,7 @@ public class GameThread implements Runnable {
      * 
      */
     public GameThread() {
-        this.player = new Player(100, 100, 100, 5.0);
+        this.player = new Player(100, 100, 100, 5);
         this.startThread();
     }
     /**

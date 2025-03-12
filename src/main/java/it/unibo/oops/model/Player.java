@@ -1,5 +1,6 @@
 package it.unibo.oops.model;
 
+import it.unibo.oops.model.Entity;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Color;
@@ -9,7 +10,7 @@ public class Player extends Entity {
 
     private String direction;
 
-    public Player(double x, double y, int health, double speed) {
+    public Player(int x, int y, int health, int speed) {
         super(x, y, health, speed);
         this.direction = "UP";
     }
@@ -18,11 +19,11 @@ public class Player extends Entity {
         return direction;
     }
 
-    public double getX() {
+    public int getX() {
         return x;
     }
 
-    public double getY() {
+    public int getY() {
         return y;
     }
 
@@ -51,6 +52,6 @@ public class Player extends Entity {
     @Override
     public void draw(Graphics2D g) {
         g.setColor(Color.GREEN);    //colore rettangolo
-        g.fillRect((int) x, (int) y, 50, 50);
+        g.fillRect(x, y, 50, 50);
     }
 }
