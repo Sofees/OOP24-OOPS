@@ -6,6 +6,7 @@ import java.awt.Font;
 import java.awt.GridLayout;
 
 import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -38,8 +39,11 @@ public class OptionPanel extends MyPanel {
         titleLabel.setFont(new Font("Arial", Font.BOLD, 24));
         super.add(titleLabel, BorderLayout.NORTH);
 
-        JPanel buttonPanel = new JPanel(new GridLayout(4, 1, 10, 10));
-        buttonPanel.setBorder(BorderFactory.createEmptyBorder(20, 50, 20, 50));
+        JPanel outerPanel = new JPanel(new BorderLayout());
+        outerPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+
+        JPanel buttonPanel = new JPanel(new GridLayout(5, 1, 10, 10));
+
 
         JButton fullscreenButton = new JButton("Fullscreen");
         JButton screenSizeButton = new JButton("Screen Size");
@@ -58,7 +62,9 @@ public class OptionPanel extends MyPanel {
         buttonPanel.add(sfxButton);
         buttonPanel.add(returnButton);
 
-        super.add(buttonPanel, BorderLayout.CENTER);
+        //super.add(buttonPanel, BorderLayout.CENTER);
+        outerPanel.add(buttonPanel, BorderLayout.CENTER);
+        super.add(outerPanel, BorderLayout.WEST);
     }
 
     private void toggleFullscreen() {
