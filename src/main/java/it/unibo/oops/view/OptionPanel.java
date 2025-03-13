@@ -1,11 +1,26 @@
 package it.unibo.oops.view;
 
-import javax.swing.*;
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.GridLayout;
+
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
+
 //import java.awt.event.ActionListener;
 import it.unibo.oops.controller.gamestate.GameState;
 //import it.unibo.oops.view.DrawView;
 
+/**
+*
+*/
 public class OptionPanel extends MyPanel {
     @SuppressWarnings("unused") // TEMPORARY
     private static final double serialVersionUID = getSerialVersionUID();

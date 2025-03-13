@@ -5,7 +5,9 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 
-import it.unibo.oops.model.*;
+import it.unibo.oops.model.ExperienceManager;
+import it.unibo.oops.model.Player;
+import it.unibo.oops.model.WeaponManager;
 /**
  * 
  */
@@ -19,28 +21,37 @@ public class GamePanel extends MyPanel {
      */
 
     private Player player;
-    private ItemManager itemManager;
-    
+    private WeaponManager weaponManager;
+    private ExperienceManager experienceManager;
+    /**
+     *
+     */
     public GamePanel(final int screenWidth, final int screenHeight) {
         super.setPreferredSize(new Dimension(screenWidth, screenHeight));
         super.setBackground(Color.RED);
     }
-
-    
-    public void setPlayer(Player player) {
+    /**
+     * Sets the current player.
+     */
+    public void setPlayer(final Player player) {
         this.player = player;
     }
-
-    public void setItemManager(ItemManager itemManager) {
-        this.itemManager = itemManager;
+    /**
+     * Sets the current itemManager
+     */
+    public void setWeaponManager(final WeaponManager weaponManager) {
+        this.weaponManager = weaponManager;
     }
 
-    protected void paintComponent(Graphics g) {
+    public void setExperienceManager(final ExperienceManager experienceManager) {
+        this.experienceManager = experienceManager;
+    }
+
+    protected void paintComponent(final Graphics g) {
         super.paintComponent(g);
-    
         Graphics2D g2d = (Graphics2D) g;
         player.draw(g2d);
-        itemManager.draw(g2d);
+        weaponManager.draw(g2d);
     }
 
 }

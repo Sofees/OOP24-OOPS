@@ -1,25 +1,30 @@
 package it.unibo.oops.controller;
-import it.unibo.oops.model.*;
-import it.unibo.oops.view.*;
+
+import it.unibo.oops.model.ExperienceManager;
+import it.unibo.oops.model.Player;
+import it.unibo.oops.model.WeaponManager;
+import it.unibo.oops.view.GamePanel;
 /**
 * 
 */
 public class GameThread implements Runnable {
 
-    private final double FPS = 60.0;
-    private final GamePanel gp;
-    private final ItemManager itemManager = new ItemManager();
-    private final Player player = new Player(0,0 , 100, 5);
+    private static final double FPS = 60.0;
 
+    private final GamePanel gp;
+    private final Player player = new Player(200,200, 100, 5);
+    private final WeaponManager weaponManager = new WeaponManager(FPS, player);
+    private final ExperienceManager experienceManager = new ExperienceManager(FPS, player);
 
     private Boolean running = true;
     /**
-     * 
+     * @param gp
      */
-    public GameThread(GamePanel gp) {
+    public GameThread(final GamePanel gp) {
         this.gp = gp;
         gp.setPlayer(this.player);
-        gp.setItemManager(this.itemManager);
+        gp.setWeaponManager(this.weaponManager);
+        gp.setExperienceManager(this.experienceManager);
         this.startThread();
     }
     /**
@@ -55,15 +60,20 @@ public class GameThread implements Runnable {
             gp.repaint();
         }
     }
-
+    /**
+     *  Updates players, items, enemies.
+     */
     public void update() {
         //chiama l'update di player, items, nemici etc.
-        itemManager.update();
+        weaponManager.update();
+        experienceManager.update();
         player.update();
     }
-
+    /**
+     *  @return frames per second
+     */
     public double getFps() {
-        return this.FPS;
+        return FPS;
     }
 
 }
