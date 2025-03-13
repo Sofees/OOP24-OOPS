@@ -18,8 +18,7 @@ public final class DrawViewImpl implements DrawView {
     private final JFrame frame = new JFrame(FRAME_NAME);
     private final Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
     private final int sw = (int) d.getWidth();
-    private final int sh = (int) d.getHeight();
-    
+    private final int sh = (int) d.getHeight();    
     private GameState currentGameState = GameState.TITLESTATE;
     /**
      * @param gameState

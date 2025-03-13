@@ -1,7 +1,5 @@
 package it.unibo.oops.model;
 
-import it.unibo.oops.model.Entity;
-import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Color;
 
@@ -29,7 +27,7 @@ public class Player extends Entity {
 
     public void setDirection(String direction) {
         this.direction = direction;
-    }
+    }   
 
     @Override
     public void update() {

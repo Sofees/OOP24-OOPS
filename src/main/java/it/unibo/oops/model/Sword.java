@@ -2,6 +2,9 @@ package it.unibo.oops.model;
 import java.awt.Color;
 import java.awt.Graphics;
 
+/**
+ * 
+ */
 public class Sword {
 
     private static final int WIDTH = 10;
@@ -20,7 +23,9 @@ public class Sword {
         this.cooldown = fps*COOLDOWN;
         this.player = player;
     }
-    
+    /**
+     * Updates the sword.
+     */
     public void update() {
         if (active) {
             timer--;
@@ -37,8 +42,10 @@ public class Sword {
             }
         }
     }
-
-    public void draw(Graphics g) {
+    /**
+     * Draws the sword.
+     */
+    public void draw(final Graphics g) {
         if (active) {
             g.setColor(Color.BLUE);
             int drawX = player.getX(), drawY = player.getY();
@@ -58,6 +65,8 @@ public class Sword {
                 case "LEFT":
                     drawX -= WIDTH;
                     drawY -= HEIGHT / 2;
+                    break;
+                default:
                     break;
             }  
             g.fillRect(drawX, drawY, WIDTH, HEIGHT);
