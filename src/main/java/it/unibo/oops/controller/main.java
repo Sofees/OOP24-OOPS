@@ -12,6 +12,6 @@ final class MainApp {
         new GameThread(new GamePanel(0, 0));
     }
     public static void main(final String[] args) {
-        new MainApp(new DrawViewImpl(GameState.PLAYSTATE));
+        new MainApp(new DrawViewImpl(GameState.TITLESTATE));
     }
 }

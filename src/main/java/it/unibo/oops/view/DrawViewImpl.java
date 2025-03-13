@@ -19,6 +19,7 @@ public final class DrawViewImpl implements DrawView {
     private final Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
     private final int sw = (int) d.getWidth();
     private final int sh = (int) d.getHeight();
+    
     private GameState currentGameState = GameState.TITLESTATE;
     /**
      * @param gameState
@@ -54,14 +55,14 @@ public final class DrawViewImpl implements DrawView {
     }
     private void setTitleState() {
         SwingUtilities.invokeLater(() -> {
-            this.frame.setContentPane(new TitlePanel(sw / PROPORTION, sh / PROPORTION));
+            this.frame.setContentPane(new TitlePanel(sw / PROPORTION, sh / PROPORTION, this));
             this.frame.pack();
         });
     }
     private void setOptionState() {
         SwingUtilities.invokeLater(() -> {
             //GamePanel da sostituire con un OptionPanel
-            this.frame.setContentPane(new GamePanel(sw / PROPORTION, sh / PROPORTION));
+            this.frame.setContentPane(new OptionPanel(sw / PROPORTION, sh / PROPORTION, this));
             this.frame.pack();
         });
     }
