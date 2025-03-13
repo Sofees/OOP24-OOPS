@@ -2,8 +2,9 @@ package it.unibo.oops.view;
 
 import javax.swing.JPanel;
 
-import it.unibo.oops.model.ItemManager;
+import it.unibo.oops.model.ExperienceManager;
 import it.unibo.oops.model.Player;
+import it.unibo.oops.model.WeaponManager;
 /**
  * 
  */
@@ -11,7 +12,8 @@ public abstract class MyPanel extends JPanel {
     private static final double serialVersionUID = 0.01;
 
     private Player player;
-    private ItemManager itemManager;
+    private WeaponManager weaponManager;
+    private ExperienceManager experienceManager;
     /**
     *  @return the SerialVersionUID
     */
@@ -25,11 +27,18 @@ public abstract class MyPanel extends JPanel {
         this.player = player;
     }
     /**
-     * Sets the current itemManager
+     * Sets the current weaponManager
      */
-    public void setItemManager(final ItemManager itemManager) {
-        this.itemManager = itemManager;
+    public void setWeaponManager(final WeaponManager weaponManager) {
+        this.weaponManager = weaponManager;
     }
+    /**
+     * Sets the current experienceManager
+     */
+    public void setExperienceManager(final ExperienceManager experienceManager) {
+        this.experienceManager = experienceManager;
+    }
+    /**
     /**
     * Gets the current player.
     */
@@ -37,9 +46,15 @@ public abstract class MyPanel extends JPanel {
         return this.player;
     }
     /**
-     * Gets the current itemManager
+     * Gets the current weaponManager
      */
-    public ItemManager getItemManager() {
-        return this.itemManager;
+    public WeaponManager getWeaponManager() {
+        return this.weaponManager;
+    }
+    /**
+     * Gets the current experienceManager
+     */
+    public ExperienceManager getExperienceManager() {
+        return this.experienceManager;
     }
 }

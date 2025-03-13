@@ -1,9 +1,11 @@
 package it.unibo.oops.controller;
 
 import it.unibo.oops.controller.gamestate.GameState;
-import it.unibo.oops.model.ItemManager;
+import it.unibo.oops.model.ExperienceManager;
 import it.unibo.oops.model.Player;
+import it.unibo.oops.model.WeaponManager;
 import it.unibo.oops.view.DrawViewImpl;
+import it.unibo.oops.view.GamePanel;
 /**
 * 
 */
@@ -13,7 +15,8 @@ public class GameThread implements Runnable {
 
     private final DrawViewImpl window;
     private final Player player = new Player(200,200, 100, 5);
-    private final ItemManager itemManager = new ItemManager(FPS, this.player);
+    private final WeaponManager weaponManager = new WeaponManager(FPS, player);
+    private final ExperienceManager experienceManager = new ExperienceManager(FPS, player);
 
     private Boolean running = true;
     /**
@@ -57,7 +60,8 @@ public class GameThread implements Runnable {
             if (this.window.getCurrentGameState() == GameState.PLAYSTATE) { 
                 if (this.window.getCurrentPanel().getPlayer() == null) {
                     this.window.getCurrentPanel().setPlayer(this.player);
-                    this.window.getCurrentPanel().setItemManager(this.itemManager);
+                    this.window.getCurrentPanel().setWeaponManager(this.weaponManager);
+                    this.window.getCurrentPanel().setExperienceManager(this.experienceManager);
                 }
                 this.window.getCurrentPanel().repaint();
             }
@@ -68,10 +72,9 @@ public class GameThread implements Runnable {
      */
     public void update() {
         //chiama l'update di player, items, nemici etc.
-        if (this.window.getCurrentGameState() == GameState.PLAYSTATE) {
-            itemManager.update();
-            player.update();
-        }
+        weaponManager.update();
+        experienceManager.update();
+        player.update();
     }
     /**
      *  @return frames per second

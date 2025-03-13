@@ -3,7 +3,7 @@ import java.awt.Graphics;
 /**
 * 
 */
-public abstract class Weapon extends Item {
+public abstract class Weapon {
     /**
      * Updates the Item.
      */

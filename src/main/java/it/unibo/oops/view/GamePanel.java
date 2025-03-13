@@ -4,8 +4,10 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import it.unibo.oops.model.ItemManager;
+
+import it.unibo.oops.model.ExperienceManager;
 import it.unibo.oops.model.Player;
+import it.unibo.oops.model.WeaponManager;
 /**
  * 
  */
@@ -13,7 +15,8 @@ public class GamePanel extends MyPanel {
     @SuppressWarnings("unused") // TEMPORARY
     private static final double serialVersionUID = getSerialVersionUID();
     private Player player;
-    private ItemManager itemManager;
+    private WeaponManager weaponManager;
+    private ExperienceManager experienceManager;
     /**
      * @param screenWidth
      * @param screenHeight
@@ -27,7 +30,7 @@ public class GamePanel extends MyPanel {
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g;
         this.getPlayer().draw(g2d);
-        this.getItemManager().draw(g2d);
+        this.getWeaponManager().draw(g2d);
     }
 
 }
