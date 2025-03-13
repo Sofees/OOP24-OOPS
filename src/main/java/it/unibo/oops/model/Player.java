@@ -8,8 +8,8 @@ public class Player extends Entity {
 
     private String direction;
 
-    public Player(int x, int y, int health, int speed) {
-        super(x, y, health, speed);
+    public Player(int x, int y, int maxHealth, int health, int speed, int size) {
+        super(x, y, maxHealth, health, speed, size);
         this.direction = "UP";
     }
 
@@ -50,6 +50,6 @@ public class Player extends Entity {
     @Override
     public void draw(Graphics2D g) {
         g.setColor(Color.GREEN);    //colore rettangolo
-        g.fillRect(x, y, 50, 50);
+        g.fillRect(x, y, size, size);
     }
 }

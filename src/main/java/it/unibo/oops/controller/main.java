@@ -5,7 +5,7 @@ import it.unibo.oops.view.DrawViewImpl;
 
 final class MainApp {
 
-    private MainApp(DrawViewImpl window) {
+    private MainApp(final DrawViewImpl window) {
         new GameThread(window);
     }
     public static void main(final String[] args) {

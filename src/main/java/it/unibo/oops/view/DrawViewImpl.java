@@ -4,10 +4,6 @@ import it.unibo.oops.controller.gamestate.GameState;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
-import it.unibo.oops.controller.GameThread;
-import it.unibo.oops.view.OptionPanel;
-import it.unibo.oops.controller.gamestate.GameState;
-
 import java.awt.Dimension;
 import java.awt.Toolkit;
 

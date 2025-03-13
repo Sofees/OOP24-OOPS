@@ -7,21 +7,29 @@ import java.awt.Graphics2D;
      */
     public abstract class Entity {
     protected int x, y;         // Posizione
+    protected int maxHealth;    // Salute Massima
     protected int health;          // Salute
+    protected int size;        // Velocità
     protected int speed;        // Velocità
     protected boolean isAlive;     // Stato
 
 
-    public Entity(int x, int y, int health, int speed) {
+    public Entity(int x, int y, int maxHealth, int health, int speed, int size) {
         this.x = x;
         this.y = y;
+        this.maxHealth = maxHealth;
         this.health = health;
         this.speed = speed;
+        this.size = size;
         this.isAlive = true;
     }
-
+    /**
+     * Draws an entity.
+     */
     public abstract void draw(Graphics2D g);
-
+    /**
+     * Updates the entity.
+     */
     public abstract void update();
     /**
      * Gives the entity's X coordinate. 

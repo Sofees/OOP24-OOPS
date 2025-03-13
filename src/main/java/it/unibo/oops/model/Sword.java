@@ -18,7 +18,7 @@ public class Sword extends Weapon{
     private final Player player;
     private final double fps;
 
-    public Sword(double fps, Player player) {
+    public Sword(final double fps, final Player player) {
         this.active = false;
         this.timer = fps*DURATION;
         this.cooldown = fps*COOLDOWN;

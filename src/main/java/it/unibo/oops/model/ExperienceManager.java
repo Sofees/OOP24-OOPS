@@ -10,7 +10,7 @@ public class ExperienceManager {
     private final Player player;
     private int playerXp;
 
-    public ExperienceManager(double fps, Player player) {
+    public ExperienceManager(final double fps, final Player player) {
         orbs = new ArrayList<>();
         this.fps = fps;
         this.player = player;
