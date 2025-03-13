@@ -26,22 +26,18 @@ public class OptionPanel extends MyPanel {
         JPanel buttonPanel = new JPanel(new GridLayout(4, 1, 10, 10));
         buttonPanel.setBorder(BorderFactory.createEmptyBorder(20, 50, 20, 50));
 
-        JButton FullscreenButton = new JButton("Fullscreen");
+        JButton fullscreenButton = new JButton("Fullscreen");
         JButton screenSizeButton = new JButton("Screen Size");
         JButton volumeButton = new JButton("Volume");
         JButton sfxButton = new JButton("SFX");
         JButton returnButton = new JButton("Return");
 
-        /* 
-        newGameButton.addActionListener(e -> drawView.changeGameState(GameState.PLAYSTATE));
-        //loadGameButton.addActionListener(e -> drawView.changeGameState(GameState.TITLEOPTIONSTATE));
-        settingsButton.addActionListener(e -> drawView.changeGameState(GameState.TESTSTATE));
-        quitButton.addActionListener(e -> System.exit(0));
-        */
 
+        fullscreenButton.addActionListener(e -> toggleFullscreen());
+        screenSizeButton.addActionListener(e -> changeScreenSize());
         returnButton.addActionListener(e -> drawView.changeGameState(GameState.TITLESTATE));
 
-        buttonPanel.add(FullscreenButton);
+        buttonPanel.add(fullscreenButton);
         buttonPanel.add(screenSizeButton);
         buttonPanel.add(volumeButton);
         buttonPanel.add(sfxButton);
@@ -49,4 +45,35 @@ public class OptionPanel extends MyPanel {
 
         super.add(buttonPanel, BorderLayout.CENTER);
     }
+
+    private void toggleFullscreen() {
+        JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
+        if (frame != null) {
+            boolean isFullscreen = frame.getExtendedState() == JFrame.MAXIMIZED_BOTH;
+            if (isFullscreen) {
+                frame.setExtendedState(JFrame.NORMAL);
+            } else {
+                frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+            }
+        }
+    }
+
+    private void changeScreenSize() {
+        JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
+        if (frame != null) {
+            String widthInput = JOptionPane.showInputDialog(frame, "Enter width:", "Screen Size", JOptionPane.PLAIN_MESSAGE);
+            String heightInput = JOptionPane.showInputDialog(frame, "Enter height:", "Screen Size", JOptionPane.PLAIN_MESSAGE);
+            
+            if (widthInput != null && heightInput != null) {
+                try {
+                    int width = Integer.parseInt(widthInput);
+                    int height = Integer.parseInt(heightInput);
+                    frame.setSize(width, height);
+                } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(frame, "Invalid input. Please enter numeric values.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        }
+    }
+    
 }
