@@ -33,16 +33,16 @@ public class Player extends Entity {
     public void update() {
        switch (direction) {
             case "UP":
-                y -= speed;
+                //y -= speed;
                 break;
             case "DOWN":
-                y += speed;
+                //y += speed;
                 break;
             case "LEFT":
-                x -= speed;
+                //x -= speed;
                 break;
             case "RIGHT":
-                x += speed;
+                //x += speed;
                 break;
        }     
     }

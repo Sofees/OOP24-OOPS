@@ -3,6 +3,7 @@ package it.unibo.oops.view;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
+import it.unibo.oops.controller.GameThread;
 import it.unibo.oops.controller.gamestate.GameState;
 
 import java.awt.Dimension;
@@ -67,7 +68,9 @@ public final class DrawViewImpl implements DrawView {
     }
     private void setPlayState() {
         SwingUtilities.invokeLater(() -> {
-            this.frame.setContentPane(new GamePanel(sw / PROPORTION, sh / PROPORTION));
+            GamePanel gamePanel = new GamePanel(sw / PROPORTION, sh / PROPORTION);
+            new GameThread(gamePanel); 
+            this.frame.setContentPane(gamePanel);
             this.frame.pack();
         });
     }

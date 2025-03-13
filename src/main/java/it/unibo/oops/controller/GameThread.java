@@ -11,8 +11,8 @@ public class GameThread implements Runnable {
     private static final double FPS = 60.0;
 
     private final GamePanel gp;
-    private final ItemManager itemManager = new ItemManager();
-    private final Player player = new Player(0,0 , 100, 5);
+    private final Player player = new Player(200,200, 100, 5);
+    private final ItemManager itemManager = new ItemManager(FPS, this.player);
 
     private Boolean running = true;
     /**

@@ -8,9 +8,13 @@ import java.util.List;
  */
 public class ItemManager {
     private final List<Item> items;
+    private final double fps;
+    private final Player player;
     
-    public ItemManager() {
+    public ItemManager(double fps, Player player) {
         items = new ArrayList<>();
+        this.fps = fps;
+        this.player = player;
     }
     /**
     * Adds an item to the list.  
@@ -28,6 +32,9 @@ public class ItemManager {
     * Updates all the items in the list.
     */
     public void update() {
+        if (!items.stream().anyMatch(item -> item instanceof Sword)) {
+            items.add(new Sword(fps, player));
+        }
         items.forEach(Item::update);
     }
     /**
@@ -35,8 +42,11 @@ public class ItemManager {
     */
     public void draw(Graphics g) {
         for (Item item : items) {
-            if (item instanceof ExperienceOrb || item instanceof Weapon) {
-                ((ExperienceOrb) item).draw(g);
+            if (item instanceof ExperienceOrb) {
+                ((ExperienceOrb)item).draw(g);
+            }
+            if (item instanceof Weapon) {
+                ((Weapon)item).draw(g);
             }
         }
     }

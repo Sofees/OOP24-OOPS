@@ -18,8 +18,8 @@ public class GamePanel extends MyPanel {
      * @param screenHeight
      */
 
-    private Player player = new Player(0,0 , 100, 5);
-    private ItemManager itemManager = new ItemManager();;
+    private Player player;
+    private ItemManager itemManager;
     /**
      *
      */
