@@ -11,40 +11,23 @@ import it.unibo.oops.model.Player;
  */
 public class GamePanel extends MyPanel { 
     @SuppressWarnings("unused") // TEMPORARY
-
     private static final double serialVersionUID = getSerialVersionUID();
+    private Player player;
+    private ItemManager itemManager;
     /**
      * @param screenWidth
      * @param screenHeight
      */
-
-    private Player player;
-    private ItemManager itemManager;
-    /**
-     *
-     */
     public GamePanel(final int screenWidth, final int screenHeight) {
+        super();
         super.setPreferredSize(new Dimension(screenWidth, screenHeight));
         super.setBackground(Color.RED);
     }
-    /**
-     * Sets the current player.
-     */
-    public void setPlayer(final Player player) {
-        this.player = player;
-    }
-    /**
-     * Sets the current itemManager
-     */
-    public void setItemManager(final ItemManager itemManager) {
-        this.itemManager = itemManager;
-    }
-
     protected void paintComponent(final Graphics g) {
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g;
-        player.draw(g2d);
-        itemManager.draw(g2d);
+        this.getPlayer().draw(g2d);
+        this.getItemManager().draw(g2d);
     }
 
 }

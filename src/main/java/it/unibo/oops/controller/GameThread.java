@@ -1,8 +1,9 @@
 package it.unibo.oops.controller;
 
+import it.unibo.oops.controller.gamestate.GameState;
 import it.unibo.oops.model.ItemManager;
 import it.unibo.oops.model.Player;
-import it.unibo.oops.view.GamePanel;
+import it.unibo.oops.view.DrawViewImpl;
 /**
 * 
 */
@@ -10,18 +11,16 @@ public class GameThread implements Runnable {
 
     private static final double FPS = 60.0;
 
-    private final GamePanel gp;
+    private final DrawViewImpl window;
     private final Player player = new Player(200,200, 100, 5);
     private final ItemManager itemManager = new ItemManager(FPS, this.player);
 
     private Boolean running = true;
     /**
-     * @param gp
+     *
      */
-    public GameThread(final GamePanel gp) {
-        this.gp = gp;
-        gp.setPlayer(this.player);
-        gp.setItemManager(this.itemManager);
+    public GameThread(final DrawViewImpl window) {
+        this.window = window;
         this.startThread();
     }
     /**
@@ -54,7 +53,14 @@ public class GameThread implements Runnable {
                 update();
                 delta--;
             }
-            gp.repaint();
+            //NOTA: Soluzione Temporanea per stampare a schermo correttamente, da cambiare
+            if (this.window.getCurrentGameState() == GameState.PLAYSTATE) { 
+                if (this.window.getCurrentPanel().getPlayer() == null) {
+                    this.window.getCurrentPanel().setPlayer(this.player);
+                    this.window.getCurrentPanel().setItemManager(this.itemManager);
+                }
+                this.window.getCurrentPanel().repaint();
+            }
         }
     }
     /**
@@ -62,8 +68,10 @@ public class GameThread implements Runnable {
      */
     public void update() {
         //chiama l'update di player, items, nemici etc.
-        itemManager.update();
-        player.update();
+        if (this.window.getCurrentGameState() == GameState.PLAYSTATE) {
+            itemManager.update();
+            player.update();
+        }
     }
     /**
      *  @return frames per second
