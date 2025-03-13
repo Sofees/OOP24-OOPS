@@ -4,8 +4,10 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import it.unibo.oops.model.ItemManager;
+
+import it.unibo.oops.model.ExperienceManager;
 import it.unibo.oops.model.Player;
+import it.unibo.oops.model.WeaponManager;
 /**
  * 
  */
@@ -19,7 +21,8 @@ public class GamePanel extends MyPanel {
      */
 
     private Player player;
-    private ItemManager itemManager;
+    private WeaponManager weaponManager;
+    private ExperienceManager experienceManager;
     /**
      *
      */
@@ -36,15 +39,19 @@ public class GamePanel extends MyPanel {
     /**
      * Sets the current itemManager
      */
-    public void setItemManager(final ItemManager itemManager) {
-        this.itemManager = itemManager;
+    public void setWeaponManager(final WeaponManager weaponManager) {
+        this.weaponManager = weaponManager;
+    }
+
+    public void setExperienceManager(final ExperienceManager experienceManager) {
+        this.experienceManager = experienceManager;
     }
 
     protected void paintComponent(final Graphics g) {
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g;
         player.draw(g2d);
-        itemManager.draw(g2d);
+        weaponManager.draw(g2d);
     }
 
 }

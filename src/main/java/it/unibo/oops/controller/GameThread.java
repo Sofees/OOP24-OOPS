@@ -1,7 +1,8 @@
 package it.unibo.oops.controller;
 
-import it.unibo.oops.model.ItemManager;
+import it.unibo.oops.model.ExperienceManager;
 import it.unibo.oops.model.Player;
+import it.unibo.oops.model.WeaponManager;
 import it.unibo.oops.view.GamePanel;
 /**
 * 
@@ -12,7 +13,8 @@ public class GameThread implements Runnable {
 
     private final GamePanel gp;
     private final Player player = new Player(200,200, 100, 5);
-    private final ItemManager itemManager = new ItemManager(FPS, this.player);
+    private final WeaponManager weaponManager = new WeaponManager(FPS, player);
+    private final ExperienceManager experienceManager = new ExperienceManager(FPS, player);
 
     private Boolean running = true;
     /**
@@ -21,7 +23,8 @@ public class GameThread implements Runnable {
     public GameThread(final GamePanel gp) {
         this.gp = gp;
         gp.setPlayer(this.player);
-        gp.setItemManager(this.itemManager);
+        gp.setWeaponManager(this.weaponManager);
+        gp.setExperienceManager(this.experienceManager);
         this.startThread();
     }
     /**
@@ -62,7 +65,8 @@ public class GameThread implements Runnable {
      */
     public void update() {
         //chiama l'update di player, items, nemici etc.
-        itemManager.update();
+        weaponManager.update();
+        experienceManager.update();
         player.update();
     }
     /**
