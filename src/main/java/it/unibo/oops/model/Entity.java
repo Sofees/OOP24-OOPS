@@ -1,20 +1,25 @@
 package it.unibo.oops.model;
 
 import java.awt.Graphics2D;
-
     /**
      * 
      */
     public abstract class Entity {
-    protected int x, y;         // Posizione
-    protected int maxHealth;    // Salute Massima
-    protected int health;          // Salute
-    protected int size;        // Velocità
-    protected int speed;        // Velocità
-    protected boolean isAlive;     // Stato
-
-
-    public Entity(int x, int y, int maxHealth, int health, int speed, int size) {
+    private int x, y;         // Posizione
+    private int maxHealth;    // Salute Massima
+    private int health;          // Salute
+    private int size;        // Velocità
+    private int speed;        // Velocità
+    private boolean isAlive;     // Stato
+    /**
+     * @param x
+     * @param y
+     * @param maxHealth
+     * @param health
+     * @param speed
+     * @param size
+     */
+    public Entity(final int x, final int y, final int maxHealth, final int health, final int speed, final int size) {
         this.x = x;
         this.y = y;
         this.maxHealth = maxHealth;
@@ -25,6 +30,7 @@ import java.awt.Graphics2D;
     }
     /**
      * Draws an entity.
+     * @param g
      */
     public abstract void draw(Graphics2D g);
     /**
@@ -32,37 +38,43 @@ import java.awt.Graphics2D;
      */
     public abstract void update();
     /**
-     * Gives the entity's X coordinate. 
+     * @return the entity's X coordinate.
      */
     public int getX() {
         return x;
     }
     /**
-     * Gives the Entity's Y coordinate. 
+     * @return the Entity's Y coordinate. 
      */
     public int getY() {
         return y;
     }
     /**
-     * Gives the Entity's health value. 
+     * @return the Entity's max health value. 
+     */
+    public int getMaxHealth() {
+        return maxHealth;
+    }
+    /**
+     * @return the Entity's health value. 
      */
     public int getHealth() {
         return health;
     }
     /**
-     * Gives the Entity's speed value. 
+     * @return the Entity's speed value. 
      */
     public int getSpeed() {
         return speed;
     }
     /**
-     * Gives the Entity's Size. 
+     * @return the Entity's Size. 
      */
     public int getSize() {
         return size;
     }
     /**
-     * Gives the Entity's alive status. 
+     * @return the Entity's alive status. 
      */
     public boolean isAlive() {
         return isAlive;
@@ -70,33 +82,52 @@ import java.awt.Graphics2D;
 
     // Setter per la salute e altre variabili, se necessario
     /**
-     * Sets the Entity's x position. 
+     * Sets the Entity's x position.
+     * @param x 
      */
-    public void setX(int x) {
+    public void setX(final int x) {
         this.x = x;
     }
     /**
      * Sets the Entity's y position. 
+     * @param y
      */
-    public void setY(int y) {
+    public void setY(final int y) {
         this.y = y;
     }
     /**
-     * Sets the Entity's health value. 
+     * Sets the Entity's max health value. 
+     * @param maxHealth
      */
-    public void setHealth(int health) {
+    public void setMaxHealth(final int maxHealth) {
+        this.maxHealth = maxHealth;
+    }
+    /**
+     * Sets the Entity's health value. 
+     * @param health
+     */
+    public void setHealth(final int health) {
         this.health = health;
     }
     /**
-     * Sets the Entity's speed value. 
+     * Sets the Entity's size value.
+     * @param size
      */
-    public void setSpeed(int speed) {
+    public void setSize(final int size) {
+        this.size = size;
+    }
+    /**
+     * Sets the Entity's speed value.
+     * @param speed
+     */
+    public void setSpeed(final int speed) {
         this.speed = speed;
     }
     /**
      * Sets the Entity's alive status. 
+     * @param isAlive
      */
-    public void setAlive(boolean isAlive) {
+    public void setAlive(final boolean isAlive) {
         this.isAlive = isAlive;
     }
 }

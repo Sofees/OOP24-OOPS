@@ -7,10 +7,13 @@ import java.util.ArrayList;
  * 
  */
 public class EnemyManager {
-    private static int WAVE_SIZE = 8;
-    private List<Enemy> enemyList = new ArrayList<>();
-    private Player player;
-
+    private static final int WAVE_SIZE = 8;
+    private static final int PLAYER_DISTANCE = 200;
+    private final List<Enemy> enemyList = new ArrayList<>();
+    private final Player player;
+    /**
+     * @param player
+     */
     public EnemyManager(final Player player) {
         this.player = player;
     }
@@ -18,31 +21,41 @@ public class EnemyManager {
     * Updates every enemy.
     */
     public void update() {
-        for (int i = 0; i < WAVE_SIZE; i++) {
-            if (!enemyList.isEmpty()) {
-                if(!enemyList.get(i).isPositioned()) {
-                    double angle = 2 * Math.PI * i / WAVE_SIZE; // Divide circle into equal parts
-                int x = (int) ((player.getX() + player.getSize() / 2) + 200 * Math.cos(angle) - enemyList.get(i).size / 2);
-                int y = (int) ((player.getY() + player.getSize() / 2) + 200 * Math.sin(angle) - enemyList.get(i).size / 2);
-                enemyList.get(i).setX(x);
-                enemyList.get(i).setY(y);
-                enemyList.get(i).setPosition(true);
-                //enemyList.get(i).setSpeed(0);
+        if (enemyList.size() >= WAVE_SIZE) {
+            for (int i = 0; i < WAVE_SIZE; i++) {
+                if (!enemyList.get(i).isPositioned()) {
+                    final double angle = 2 * Math.PI * i / WAVE_SIZE; // Divide circle into equal parts
+                    final int x = player.getX() + player.getSize() / 2
+                    + (int) (PLAYER_DISTANCE * Math.cos(angle) - enemyList.get(i).getSize() / 2);
+                    final int y = player.getY() + player.getSize() / 2
+                    + (int) (PLAYER_DISTANCE * Math.sin(angle) - enemyList.get(i).getSize() / 2);
+                    enemyList.get(i).setX(x);
+                    enemyList.get(i).setY(y);
+                    enemyList.get(i).setPosition(true);
+                    enemyList.get(i).setSpeed(1);
                 }
                 enemyList.get(i).update();
             }
         }
     }
     /**
-    * Adds an enemy to the list.
-    */
-    public void addEnemy(Enemy enemy) {
-            enemyList.add(enemy);
-    }
+     * Adds an enemy to the list.
+     * @param enemy 
+     */
+    public void addEnemy(final Enemy enemy) {
+        enemyList.add(enemy);
+}
+    // /**
+    // * Adds a wave of the same enemy to the list.
+    // */
+    // public void addWave(Enemy enemy) {
+    // }
+
     /**
-    * Draws every enemy.
-    */
-    public void drawWave(Graphics2D g2d) {
+     * Draws every enemy.
+     * @param g2d
+     */
+    public void drawWave(final Graphics2D g2d) {
         for (int i = 0; i < WAVE_SIZE; i++) {
             enemyList.get(i).draw(g2d);
         }

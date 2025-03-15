@@ -13,11 +13,25 @@ import it.unibo.oops.view.DrawViewImpl;
 public class GameThread implements Runnable {
 
     private static final double FPS = 60.0;
+    private static final double NANO_FPS = 1_000_000_000 / FPS; 
+    private static final int MAX_DELTA = 1;
+    private static final int PLAYER_X = 200;
+    private static final int PLAYER_Y = 200;
+    private static final int PLAYER_MAX_HEALTH = 100;
+    private static final int PLAYER_HEALTH = 100;
+    private static final int PLAYER_SPEED = 5;
+    private static final int PLAYER_SIZE = 50;
+    private static final int ENEMY_X = 300;
+    private static final int ENEMY_Y = 200;
+    private static final int ENEMY_MAXHEALTH = 100;
+    private static final int ENEMY_HEALTH = 100;
+    private static final int ENEMY_SPEED = 2;
+    private static final int ENEMY_SIZE = 50;
 
     private final DrawViewImpl window;
-    private final Player player = new Player(200, 200, 100, 100, 5, 50);
+    private final Player player = new Player(PLAYER_X, PLAYER_Y, PLAYER_MAX_HEALTH, PLAYER_HEALTH, PLAYER_SPEED, PLAYER_SIZE);
     private final EnemyManager enemyManager = new EnemyManager(player);
-    private final Enemy enemy = new Enemy(this.player, 300, 200, 100, 100, 2, 50);
+    private final Enemy enemy = new Enemy(ENEMY_X, ENEMY_Y, ENEMY_MAXHEALTH, ENEMY_HEALTH, ENEMY_SPEED, ENEMY_SIZE);
     private final WeaponManager weaponManager = new WeaponManager(FPS, player);
     private final ExperienceManager experienceManager = new ExperienceManager(FPS, player);
 
@@ -48,21 +62,20 @@ public class GameThread implements Runnable {
     @Override
     public void run() {
         long lastTime = System.nanoTime();
-        double nanoFps = 1000000000 / FPS;
         double delta = 0;
 
         while (running) {
-            long currentTime = System.nanoTime();
-            delta += (currentTime - lastTime) / nanoFps;
+            final long currentTime = System.nanoTime();
+            delta += (currentTime - lastTime) / NANO_FPS;
             lastTime = currentTime;
-            while (delta >= 1) {
+            while (delta >= MAX_DELTA) {
                 update();
                 delta--;
             }
-            
             //NOTA: Soluzione Temporanea per stampare a schermo correttamente, da cambiare
-            if (this.window.getCurrentGameState() == GameState.PLAYSTATE) { 
-                this.enemyManager.addEnemy(new Enemy(this.player, 300, 100, 10, 10, 2, 100));   
+            if (this.window.getCurrentGameState() == GameState.PLAYSTATE) {
+                this.enemyManager.
+                addEnemy(new Enemy(ENEMY_X, ENEMY_Y, ENEMY_MAXHEALTH, ENEMY_HEALTH, ENEMY_SPEED, ENEMY_SIZE * 2));
                 if (this.window.getCurrentPanel().getPlayer() == null) {
                     this.window.getCurrentPanel().setPlayer(this.player);
                     this.window.getCurrentPanel().setEnemyManager(enemyManager);
@@ -79,11 +92,13 @@ public class GameThread implements Runnable {
      */
     public void update() {
         //chiama l'update di player, items, nemici etc.
-        weaponManager.update();
-        experienceManager.update();
-        player.update();
-        enemyManager.update();
-        enemy.update();
+        if (this.window.getCurrentGameState() == GameState.PLAYSTATE) {
+            weaponManager.update();
+            experienceManager.update();
+            player.update();
+            enemyManager.update();
+            enemy.update();
+        }
     }
     /**
      *  @return frames per second

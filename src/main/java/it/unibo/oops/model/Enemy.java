@@ -2,18 +2,23 @@ package it.unibo.oops.model;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
-/*
+/**
  * 
  */
 public class Enemy extends Entity {
-
-    private final Player player;
-    private boolean isPositioned = false;
-    private String direction = "LEFT";
-    
-    public Enemy(Player player, int x, int y, int maxHealth, int health, int speed, int size) {
+    //TEMPORARLY FINAL and STATIC
+    private static final String DIRECTION = "LEFT";
+    private boolean isPositioned;
+    /**
+     * @param x
+     * @param y
+     * @param maxHealth
+     * @param health
+     * @param speed
+     * @param size
+     */
+    public Enemy(final int x, final int y, final int maxHealth, final int health, final int speed, final int size) {
         super(x, y, maxHealth, health, speed, size);
-        this.player = player;
     }
     /**
      * @return if the enemy has been positioned.
@@ -24,27 +29,27 @@ public class Enemy extends Entity {
     /**
      * @param isPositioned
      */
-    public void setPosition(boolean isPositioned) {
+    public void setPosition(final boolean isPositioned) {
         this.isPositioned = isPositioned;
     }
     /**
      * Draws current enemy.
      */
     @Override
-    public void draw(Graphics2D g2) {
+    public void draw(final Graphics2D g2) {
         g2.setColor(Color.RED);
-        g2.fillOval(x, y, size, size);
+        g2.fillOval(getX(), getY(), getSize(), getSize());
     }
     /**
-     * Updates current enemy
+     * Updates current enemy.
      */
     @Override
     public void update() {
-        switch (direction) {
-            case "UP" -> y -= speed;
-            case "DOWN" -> y += speed;
-            case "LEFT" -> x -= speed;
-            case "RIGHT" -> x += speed;
+        switch (DIRECTION) {
+            case "UP" -> setY(getY() - getSpeed());
+            case "DOWN" -> setY(getY() + getSpeed());
+            case "LEFT" -> setX(getX() - getSpeed());
+            case "RIGHT" -> setX(getX() + getSpeed());
             default -> throw new IllegalArgumentException();
        }
     }

@@ -19,9 +19,14 @@ public class GamePanel extends MyPanel {
         super.setPreferredSize(new Dimension(screenWidth, screenHeight));
         super.setBackground(Color.BLACK);
     }
+    /**
+     * Draws on the Screen.
+     * @param g
+     */
+    @Override
     protected void paintComponent(final Graphics g) {
         super.paintComponent(g);
-        Graphics2D g2d = (Graphics2D) g;
+        final Graphics2D g2d = (Graphics2D) g;
         this.getPlayer().draw(g2d);
         this.getEnemyManager().drawWave(g2d);
         this.getEnemy().draw(g2d);

@@ -5,7 +5,7 @@ import java.awt.Graphics;
 /**
  * 
  */
-public class Sword extends Weapon{
+public class Sword extends Weapon {
 
     private static final int WIDTH = 10;
     private static final int HEIGHT = 30;
@@ -17,24 +17,28 @@ public class Sword extends Weapon{
     private boolean active;
     private final Player player;
     private final double fps;
-
+    /**
+     * @param fps
+     * @param player
+     */
     public Sword(final double fps, final Player player) {
         this.active = false;
-        this.timer = fps*DURATION;
-        this.cooldown = fps*COOLDOWN;
+        this.timer = fps * DURATION;
+        this.cooldown = fps * COOLDOWN;
         this.fps = fps;
         this.player = player;
     }
     /**
      * Updates the sword.
      */
+    @Override
     public void update() {
         if (active) {
             timer--;
             if (timer <= 0) {
                 active = false;
-                this.cooldown = fps*COOLDOWN;
-                this.timer = fps*DURATION;
+                this.cooldown = fps * COOLDOWN;
+                this.timer = fps * DURATION;
             }
         } else {
             if (cooldown <= 0) {
@@ -46,14 +50,16 @@ public class Sword extends Weapon{
     }
     /**
      * Draws the sword.
+     * @param g
      */
+    @Override
     public void draw(final Graphics g) {
         if (active) {
             g.setColor(Color.BLUE);
             int drawX = player.getX(), drawY = player.getY();
             switch (player.getDirection()) {
                 case "UP":
-                    drawX = player.getX() + WIDTH*2;
+                    drawX = player.getX() + WIDTH * 2;
                     drawY = player.getY() - HEIGHT;
                     break;
                 case "RIGHT": 
@@ -70,7 +76,7 @@ public class Sword extends Weapon{
                     break;
                 default:
                     break;
-            }  
+            }
             g.fillRect(drawX, drawY, WIDTH, HEIGHT);
         }
     }

@@ -6,6 +6,9 @@ import javax.swing.SwingUtilities;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.lang.reflect.InvocationTargetException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * 
@@ -13,11 +16,12 @@ import java.awt.Toolkit;
 public final class DrawViewImpl implements DrawView {
     private static final String FRAME_NAME = "OOP Survivors";
     private static final int PROPORTION = 3;
+    private static final Logger LOGGER = Logger.getLogger(DrawViewImpl.class.getName());
 
     private final JFrame frame = new JFrame(FRAME_NAME);
     private final Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
     private final int sw = (int) d.getWidth();
-    private final int sh = (int) d.getHeight();    
+    private final int sh = (int) d.getHeight();
     private GameState currentGameState;
     private MyPanel currentPanel;
     /**
@@ -31,8 +35,10 @@ public final class DrawViewImpl implements DrawView {
                 this.frame.setLocationRelativeTo(null);
                 this.start();
             });
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (InterruptedException e) {
+            LOGGER.log(Level.SEVERE, "An InterruptedException occurred: ", e);
+        } catch (InvocationTargetException e) {
+            LOGGER.log(Level.SEVERE, "An InvocationTargetException occurred: ", e.getCause());
         }
     }
 
@@ -65,7 +71,9 @@ public final class DrawViewImpl implements DrawView {
             this.setState();
         }
     }
-    
+    /**
+    *  Sets the current panel on the screen.
+    */
     private void setState() {
         SwingUtilities.invokeLater(() -> {
             this.frame.setContentPane(this.currentPanel);
