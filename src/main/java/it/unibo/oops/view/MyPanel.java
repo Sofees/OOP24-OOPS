@@ -3,6 +3,7 @@ package it.unibo.oops.view;
 import javax.swing.JPanel;
 
 import it.unibo.oops.model.Enemy;
+import it.unibo.oops.model.EnemyManager;
 import it.unibo.oops.model.ExperienceManager;
 import it.unibo.oops.model.Player;
 import it.unibo.oops.model.WeaponManager;
@@ -13,6 +14,7 @@ public abstract class MyPanel extends JPanel {
     private static final double serialVersionUID = 0.01;
 
     private Player player;
+    private EnemyManager enemyManager;
     private Enemy enemy;
     private WeaponManager weaponManager;
     private ExperienceManager experienceManager;
@@ -27,6 +29,12 @@ public abstract class MyPanel extends JPanel {
     */
     public void setPlayer(final Player player) {
         this.player = player;
+    }
+    /**
+    * Sets an enemyManager.
+    */
+    public void setEnemyManager(final EnemyManager enemyManager) {
+        this.enemyManager = enemyManager;
     }
     /**
     * Sets an enemy.
@@ -53,7 +61,13 @@ public abstract class MyPanel extends JPanel {
         return this.player;
     }
     /**
-    * Gets the current player.
+    * Gets the current enemyManager.
+    */
+    public EnemyManager getEnemyManager() {
+        return this.enemyManager;
+    }
+    /**
+    * Gets the current enemy.
     */
     public Enemy getEnemy() {
         return this.enemy;

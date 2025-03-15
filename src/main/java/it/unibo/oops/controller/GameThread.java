@@ -2,6 +2,7 @@ package it.unibo.oops.controller;
 
 import it.unibo.oops.controller.gamestate.GameState;
 import it.unibo.oops.model.Enemy;
+import it.unibo.oops.model.EnemyManager;
 import it.unibo.oops.model.ExperienceManager;
 import it.unibo.oops.model.Player;
 import it.unibo.oops.model.WeaponManager;
@@ -15,7 +16,7 @@ public class GameThread implements Runnable {
 
     private final DrawViewImpl window;
     private final Player player = new Player(200, 200, 100, 100, 5, 50);
-    //Test enemy
+    private final EnemyManager enemyManager = new EnemyManager(player);
     private final Enemy enemy = new Enemy(300, 200, 100, 100, 5, 50);
     private final WeaponManager weaponManager = new WeaponManager(FPS, player);
     private final ExperienceManager experienceManager = new ExperienceManager(FPS, player);
@@ -27,6 +28,7 @@ public class GameThread implements Runnable {
     public GameThread(final DrawViewImpl window) {
         this.window = window;
         this.startThread();
+        this.enemyManager.addEnemy(new Enemy(300, 100, 10, 10, 10, 100));
     }
     /**
      * Starts the gameThread.
@@ -62,6 +64,7 @@ public class GameThread implements Runnable {
             if (this.window.getCurrentGameState() == GameState.PLAYSTATE) { 
                 if (this.window.getCurrentPanel().getPlayer() == null) {
                     this.window.getCurrentPanel().setPlayer(this.player);
+                    this.window.getCurrentPanel().setEnemyManager(enemyManager);
                     this.window.getCurrentPanel().setEnemy(this.enemy);
                     this.window.getCurrentPanel().setWeaponManager(this.weaponManager);
                     this.window.getCurrentPanel().setExperienceManager(this.experienceManager);
