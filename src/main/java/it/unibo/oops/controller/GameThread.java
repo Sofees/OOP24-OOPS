@@ -17,7 +17,7 @@ public class GameThread implements Runnable {
     private final DrawViewImpl window;
     private final Player player = new Player(200, 200, 100, 100, 5, 50);
     private final EnemyManager enemyManager = new EnemyManager(player);
-    private final Enemy enemy = new Enemy(300, 200, 100, 100, 5, 50);
+    private final Enemy enemy = new Enemy(this.player, 300, 200, 100, 100, 2, 50);
     private final WeaponManager weaponManager = new WeaponManager(FPS, player);
     private final ExperienceManager experienceManager = new ExperienceManager(FPS, player);
 
@@ -28,7 +28,6 @@ public class GameThread implements Runnable {
     public GameThread(final DrawViewImpl window) {
         this.window = window;
         this.startThread();
-        this.enemyManager.addEnemy(new Enemy(300, 100, 10, 10, 10, 100));
     }
     /**
      * Starts the gameThread.
@@ -60,8 +59,10 @@ public class GameThread implements Runnable {
                 update();
                 delta--;
             }
+            
             //NOTA: Soluzione Temporanea per stampare a schermo correttamente, da cambiare
             if (this.window.getCurrentGameState() == GameState.PLAYSTATE) { 
+                this.enemyManager.addEnemy(new Enemy(this.player, 300, 100, 10, 10, 2, 100));   
                 if (this.window.getCurrentPanel().getPlayer() == null) {
                     this.window.getCurrentPanel().setPlayer(this.player);
                     this.window.getCurrentPanel().setEnemyManager(enemyManager);
@@ -81,6 +82,8 @@ public class GameThread implements Runnable {
         weaponManager.update();
         experienceManager.update();
         player.update();
+        enemyManager.update();
+        enemy.update();
     }
     /**
      *  @return frames per second

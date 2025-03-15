@@ -56,6 +56,12 @@ import java.awt.Graphics2D;
         return speed;
     }
     /**
+     * Gives the Entity's Size. 
+     */
+    public int getSize() {
+        return size;
+    }
+    /**
      * Gives the Entity's alive status. 
      */
     public boolean isAlive() {
@@ -63,6 +69,18 @@ import java.awt.Graphics2D;
     }
 
     // Setter per la salute e altre variabili, se necessario
+    /**
+     * Sets the Entity's x position. 
+     */
+    public void setX(int x) {
+        this.x = x;
+    }
+    /**
+     * Sets the Entity's y position. 
+     */
+    public void setY(int y) {
+        this.y = y;
+    }
     /**
      * Sets the Entity's health value. 
      */

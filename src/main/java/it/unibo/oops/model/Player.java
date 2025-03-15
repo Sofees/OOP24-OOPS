@@ -16,19 +16,11 @@ public class Player extends Entity {
     public String getDirection() {
         return direction;
     }
-
-    public int getX() {
-        return x;
-    }
-
-    public int getY() {
-        return y;
-    }
+    
 
     public void setDirection(String direction) {
         this.direction = direction;
     }   
-
     @Override
     public void update() {
        switch (direction) {
