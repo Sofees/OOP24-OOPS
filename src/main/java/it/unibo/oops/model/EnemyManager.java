@@ -8,6 +8,7 @@ import java.util.ArrayList;
  */
 public class EnemyManager {
     private static final int WAVE_SIZE = 8;
+    private static final int ENEMY_CAP = 1000;
     private static final int PLAYER_DISTANCE = 200;
     private final List<Enemy> enemyList = new ArrayList<>();
     private final Player player;
@@ -43,8 +44,10 @@ public class EnemyManager {
      * @param enemy 
      */
     public void addEnemy(final Enemy enemy) {
-        enemyList.add(enemy);
-}
+        if (enemyList.size() <= ENEMY_CAP) {
+            enemyList.add(enemy);
+        }
+    }
     // /**
     // * Adds a wave of the same enemy to the list.
     // */
@@ -59,5 +62,6 @@ public class EnemyManager {
         for (int i = 0; i < WAVE_SIZE; i++) {
             enemyList.get(i).draw(g2d);
         }
+        System.out.println(enemyList.size());
     }
 }
