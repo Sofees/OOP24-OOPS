@@ -1,6 +1,7 @@
 package it.unibo.oops.view;
 
 import it.unibo.oops.controller.gamestate.GameState;
+
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
@@ -16,7 +17,6 @@ import java.util.logging.Logger;
 public final class DrawViewImpl implements DrawView {
     private static final String FRAME_NAME = "OOP Survivors";
     private static final int PROPORTION = 3;
-    private static final Logger LOGGER = Logger.getLogger(DrawViewImpl.class.getName());
 
     private final JFrame frame = new JFrame(FRAME_NAME);
     private final Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
@@ -36,9 +36,11 @@ public final class DrawViewImpl implements DrawView {
                 this.start();
             });
         } catch (InterruptedException e) {
-            LOGGER.log(Level.SEVERE, "An InterruptedException occurred: ", e);
+            Logger.getLogger(DrawViewImpl.class.getName()).
+            log(Level.SEVERE, "An InterruptedException occurred: ", e);
         } catch (InvocationTargetException e) {
-            LOGGER.log(Level.SEVERE, "An InvocationTargetException occurred: ", e.getCause());
+            Logger.getLogger(DrawViewImpl.class.getName()).
+            log(Level.SEVERE, "An InvocationTargetException occurred: ", e.getCause());
         }
     }
 

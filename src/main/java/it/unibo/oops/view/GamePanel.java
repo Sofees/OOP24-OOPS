@@ -28,8 +28,7 @@ public class GamePanel extends MyPanel {
         super.paintComponent(g);
         final Graphics2D g2d = (Graphics2D) g;
         this.getPlayer().draw(g2d);
-        this.getEnemyManager().drawWave(g2d);
-        this.getEnemy().draw(g2d);
+        this.getEnemyManager().draw(g2d);
         this.getWeaponManager().draw(g2d);
     }
 

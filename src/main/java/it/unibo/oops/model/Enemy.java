@@ -1,11 +1,16 @@
 package it.unibo.oops.model;
 
-import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import javax.imageio.ImageIO;
 /**
  * 
  */
-public class Enemy extends Entity {
+public abstract class Enemy extends Entity {
     //TEMPORARLY FINAL and STATIC
     private static final String DIRECTION = "LEFT";
     private boolean isPositioned;
@@ -37,8 +42,14 @@ public class Enemy extends Entity {
      */
     @Override
     public void draw(final Graphics2D g2) {
-        g2.setColor(Color.RED);
-        g2.fillOval(getX(), getY(), getSize(), getSize());
+        try {
+            final BufferedImage image = 
+            ImageIO.read(this.getClass().getResource("./resources/Monster/" + this.getClass().getSimpleName() + ".png"));
+            g2.drawImage(image, getX(), getY(), null);
+        } catch (IOException e) {
+            Logger.getLogger(this.getClass().getName()).
+            log(Level.SEVERE, "An InterruptedException occurred: ", e);
+        }
     }
     /**
      * Updates current enemy.

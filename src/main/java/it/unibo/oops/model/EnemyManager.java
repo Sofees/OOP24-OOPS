@@ -33,7 +33,7 @@ public class EnemyManager {
                     enemyList.get(i).setX(x);
                     enemyList.get(i).setY(y);
                     enemyList.get(i).setPosition(true);
-                    enemyList.get(i).setSpeed(1);
+                    enemyList.get(i).setSpeed(0);
                 }
                 enemyList.get(i).update();
             }
@@ -58,10 +58,10 @@ public class EnemyManager {
      * Draws every enemy.
      * @param g2d
      */
-    public void drawWave(final Graphics2D g2d) {
+    public void draw(final Graphics2D g2d) {
         for (int i = 0; i < WAVE_SIZE; i++) {
             enemyList.get(i).draw(g2d);
         }
-        System.out.println(enemyList.size());
+        //System.out.println(enemyList.size());
     }
 }

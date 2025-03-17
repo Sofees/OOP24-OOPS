@@ -1,7 +1,8 @@
 package it.unibo.oops.controller;
 
 import it.unibo.oops.controller.gamestate.GameState;
-import it.unibo.oops.model.Enemy;
+import it.unibo.oops.model.EnemyFactory;
+import it.unibo.oops.model.EnemyFactoryImpl;
 import it.unibo.oops.model.EnemyManager;
 import it.unibo.oops.model.ExperienceManager;
 import it.unibo.oops.model.Player;
@@ -31,7 +32,7 @@ public class GameThread implements Runnable {
     private final DrawViewImpl window;
     private final Player player = new Player(PLAYER_X, PLAYER_Y, PLAYER_MAX_HEALTH, PLAYER_HEALTH, PLAYER_SPEED, PLAYER_SIZE);
     private final EnemyManager enemyManager = new EnemyManager(player);
-    private final Enemy enemy = new Enemy(ENEMY_X, ENEMY_Y, ENEMY_MAXHEALTH, ENEMY_HEALTH, ENEMY_SPEED, ENEMY_SIZE);
+    private final EnemyFactory enemyFactory = new EnemyFactoryImpl();
     private final WeaponManager weaponManager = new WeaponManager(FPS, player);
     private final ExperienceManager experienceManager = new ExperienceManager(FPS, player);
 
@@ -75,11 +76,11 @@ public class GameThread implements Runnable {
             //NOTA: Soluzione Temporanea per stampare a schermo correttamente, da cambiare
             if (this.window.getCurrentGameState() == GameState.PLAYSTATE) {
                 this.enemyManager.
-                addEnemy(new Enemy(ENEMY_X, ENEMY_Y, ENEMY_MAXHEALTH, ENEMY_HEALTH, ENEMY_SPEED, ENEMY_SIZE * 2));
+                addEnemy(this.enemyFactory.
+                createSlime(ENEMY_X, ENEMY_Y, ENEMY_MAXHEALTH, ENEMY_HEALTH, ENEMY_SPEED, ENEMY_SIZE * 2));
                 if (this.window.getCurrentPanel().getPlayer() == null) {
                     this.window.getCurrentPanel().setPlayer(this.player);
                     this.window.getCurrentPanel().setEnemyManager(enemyManager);
-                    this.window.getCurrentPanel().setEnemy(this.enemy);
                     this.window.getCurrentPanel().setWeaponManager(this.weaponManager);
                     this.window.getCurrentPanel().setExperienceManager(this.experienceManager);
                 }
@@ -97,7 +98,6 @@ public class GameThread implements Runnable {
             experienceManager.update();
             player.update();
             enemyManager.update();
-            enemy.update();
         }
     }
     /**
