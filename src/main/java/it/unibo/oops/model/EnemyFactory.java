@@ -12,5 +12,5 @@ public interface EnemyFactory {
      * @param size
      * @return a new instance of a Slime enemy.
      */
-    Enemy createSlime(int x, int y, int maxHealth, int health, int speed, int size);
+    Enemy createSlime(int x, int y, int maxHealth, int health, int speed, int size, Player player);
 }

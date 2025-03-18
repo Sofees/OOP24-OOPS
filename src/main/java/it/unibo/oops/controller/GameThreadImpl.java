@@ -67,7 +67,7 @@ public class GameThreadImpl implements Runnable, GameThread {
             if (this.window.getCurrentGameState() == GameState.PLAYSTATE) {
                 this.enemyManager.
                 addEnemy(this.enemyFactory.
-                createSlime(ENEMY_X, ENEMY_Y, ENEMY_MAXHEALTH, ENEMY_HEALTH, ENEMY_SPEED, ENEMY_SIZE * 2));
+                createSlime(ENEMY_X, ENEMY_Y, ENEMY_MAXHEALTH, ENEMY_HEALTH, ENEMY_SPEED, ENEMY_SIZE * 2, this.player));
                 this.window.repaint();
             }
         }

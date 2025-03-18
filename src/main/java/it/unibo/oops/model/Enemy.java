@@ -11,9 +11,9 @@ import javax.imageio.ImageIO;
  * 
  */
 public abstract class Enemy extends Entity {
-    //TEMPORARLY FINAL and STATIC
-    private static final String DIRECTION = "LEFT";
+    private Direction direction;
     private boolean isPositioned;
+    private final Player player;
     /**
      * @param x
      * @param y
@@ -22,8 +22,9 @@ public abstract class Enemy extends Entity {
      * @param speed
      * @param size
      */
-    public Enemy(final int x, final int y, final int maxHealth, final int health, final int speed, final int size) {
+    public Enemy(final int x, final int y, final int maxHealth, final int health, final int speed, final int size, final Player player) {
         super(x, y, maxHealth, health, speed, size);
+        this.player = player;
     }
     /**
      * @return if the enemy has been positioned.
@@ -56,11 +57,23 @@ public abstract class Enemy extends Entity {
      */
     @Override
     public void update() {
-        switch (DIRECTION) {
-            case "UP" -> setY(getY() - getSpeed());
-            case "DOWN" -> setY(getY() + getSpeed());
-            case "LEFT" -> setX(getX() - getSpeed());
-            case "RIGHT" -> setX(getX() + getSpeed());
+        if(player.getX() < this.getX()) {
+            if(player.getY() < this.getY()) {
+                direction = Direction.UP;
+            } else {
+                direction = Direction.LEFT;
+            }
+        } else {
+            if(player.getY() < this.getY()) {
+                direction = Direction.RIGHT;
+            }
+            direction = Direction.DOWN;
+        }
+        switch (direction) {
+            case Direction.UP -> setY(getY() - getSpeed());
+            case Direction.DOWN -> setY(getY() + getSpeed());
+            case Direction.LEFT -> setX(getX() - getSpeed());
+            case Direction.RIGHT -> setX(getX() + getSpeed());
             default -> throw new IllegalArgumentException();
        }
     }

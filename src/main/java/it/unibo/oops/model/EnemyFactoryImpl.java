@@ -13,7 +13,7 @@ public class EnemyFactoryImpl implements EnemyFactory {
      * @return a new instance of a Slime enemy.
      */
     @Override
-    public Enemy createSlime(final int x, final int y, final int maxHealth, final int health, final int speed, final int size) {
-        return new Slime(x, y, maxHealth, health, speed, size);
+    public Enemy createSlime(final int x, final int y, final int maxHealth, final int health, final int speed, final int size, final Player player) {
+        return new Slime(x, y, maxHealth, health, speed, size, player);
     }
 }

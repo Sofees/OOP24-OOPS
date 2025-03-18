@@ -54,12 +54,6 @@ public class EnemyManager {
             enemyList.add(enemy);
         }
     }
-    // /**
-    // * Adds a wave of the same enemy to the list.
-    // */
-    // public void addWave(Enemy enemy) {
-    // }
-
     /**
      * Draws every enemy.
      * @param g2d
