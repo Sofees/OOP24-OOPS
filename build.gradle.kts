@@ -56,8 +56,3 @@ tasks.test {
     }
 }
 
-sourceSets {
-    main {
-        resources.srcDirs = ["src/main/resources"]
-    }
-}

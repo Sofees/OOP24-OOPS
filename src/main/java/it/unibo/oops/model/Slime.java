@@ -10,8 +10,10 @@ public class Slime extends Enemy {
      * @param health
      * @param speed
      * @param size
+     * @param player
      */
-    public Slime(final int x, final int y, final int maxHealth, final int health, final int speed, final int size, final Player player) {
+    public Slime(final int x, final int y, final int maxHealth, final int health, final int speed,
+            final int size, final Player player) {
         super(x, y, maxHealth, health, speed, size, player);
     }
 }
