@@ -14,23 +14,20 @@ public class Sword extends Weapon {
 
     private static final int WIDTH = 10;
     private static final int HEIGHT = 30;
-    private static final double DURATION = 0.5;
-    private static final double COOLDOWN = 1.5;
+    private static final double DURATION = 30;
+    private static final double COOLDOWN = 90;
 
     private double timer;
     private double cooldown;
     private boolean active;
     private final Player player;
-    private final double fps;
     /**
-     * @param fps
      * @param player
      */
-    public Sword(final double fps, final Player player) {
+    public Sword(final Player player) {
         this.active = false;
-        this.timer = fps * DURATION;
-        this.cooldown = fps * COOLDOWN;
-        this.fps = fps;
+        this.timer = DURATION;
+        this.cooldown = COOLDOWN;
         this.player = player;
     }
     /**
@@ -42,8 +39,8 @@ public class Sword extends Weapon {
             timer--;
             if (timer <= 0) {
                 active = false;
-                this.cooldown = fps * COOLDOWN;
-                this.timer = fps * DURATION;
+                this.cooldown = COOLDOWN;
+                this.timer = DURATION;
             }
         } else {
             if (cooldown <= 0) {

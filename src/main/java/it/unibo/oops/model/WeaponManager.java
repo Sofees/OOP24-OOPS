@@ -13,15 +13,13 @@ justification = "Every weapon needs a player, so this class has to pass it on. "
         + "and while it's not necessary for player to be externally mutable for this class, it has to be for others.")
 public class WeaponManager {
     private final List<Weapon> weapons;
-    private final double fps;
     private final Player player;
     /**
      * @param fps
      * @param player
      */
-    public WeaponManager(final double fps, final Player player) {
+    public WeaponManager(final Player player) {
         weapons = new ArrayList<>();
-        this.fps = fps;
         this.player = player;
     }
     /**
@@ -29,7 +27,7 @@ public class WeaponManager {
      */
     public void update() {
         if (!weapons.stream().anyMatch(item -> item instanceof Sword)) {
-            weapons.add(new Sword(fps, player));
+            weapons.add(new Sword(player));
         }
         for (final Weapon weapon : weapons) {
             weapon.update();

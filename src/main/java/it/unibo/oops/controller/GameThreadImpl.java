@@ -31,7 +31,7 @@ public class GameThreadImpl implements Runnable, GameThread {
     private final Player player = new Player(PLAYER_X, PLAYER_Y, PLAYER_MAX_HEALTH, PLAYER_HEALTH, PLAYER_SPEED, PLAYER_SIZE);
     private final EnemyManager enemyManager = new EnemyManager(player);
     private final EnemyFactory enemyFactory = new EnemyFactoryImpl();
-    private final WeaponManager weaponManager = new WeaponManager(timer.getFps(), player);
+    private final WeaponManager weaponManager = new WeaponManager(player);
     private final ExperienceManager experienceManager = new ExperienceManager(/*FPS, */player);
     private final DrawViewImpl window = 
     new DrawViewImpl(GameState.TITLESTATE, this.player, this.enemyManager, this.weaponManager, this.experienceManager);
