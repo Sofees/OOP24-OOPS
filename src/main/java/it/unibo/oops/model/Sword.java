@@ -2,9 +2,14 @@ package it.unibo.oops.model;
 import java.awt.Color;
 import java.awt.Graphics;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 /**
  * 
  */
+@SuppressFBWarnings(value = {"EI2"}, 
+justification = "To position the weapon, the player size and position are needed, "
+        + "and while it's not necessary for the player to be externally mutable for this class, it has to be for others.")
 public class Sword extends Weapon {
 
     private static final int WIDTH = 10;
@@ -58,20 +63,20 @@ public class Sword extends Weapon {
             g.setColor(Color.BLUE);
             int drawX = player.getX(), drawY = player.getY();
             switch (player.getDirection()) {
-                case "UP":
+                case Direction.UP:
                     drawX = player.getX() + WIDTH * 2;
                     drawY = player.getY() - HEIGHT;
                     break;
-                case "RIGHT": 
+                case Direction.RIGHT: 
                     drawX = WIDTH;
                     drawY = HEIGHT / 2;
                     break;
-                case "DOWN":
+                case Direction.DOWN:
                     drawX = WIDTH / 2;
                     drawY = HEIGHT;
                     break;
-                case "LEFT":
-                    drawX = WIDTH;
+                case Direction.LEFT:
+                    drawX = WIDTH / 2;
                     drawY = HEIGHT / 2;
                     break;
                 default:

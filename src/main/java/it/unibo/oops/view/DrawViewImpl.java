@@ -1,15 +1,16 @@
 package it.unibo.oops.view;
 
 import it.unibo.oops.controller.gamestate.GameState;
+import it.unibo.oops.model.EnemyManager;
+import it.unibo.oops.model.ExperienceManager;
+import it.unibo.oops.model.Player;
+import it.unibo.oops.model.WeaponManager;
 
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
-import java.lang.reflect.InvocationTargetException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * 
@@ -24,24 +25,28 @@ public final class DrawViewImpl implements DrawView {
     private final int sh = (int) d.getHeight();
     private GameState currentGameState;
     private MyPanel currentPanel;
+    private final TitlePanel titlePanel;
+    private final OptionPanel optionPanel;
+    private final GamePanel gamePanel;
+    private final TestPanel testPanel;
     /**
      * @param gameState
+     * @param player
+     * @param enemyManager
+     * @param weaponManager
+     * @param experienceManager
      */
-    public DrawViewImpl(final GameState gameState) {
-        try {
-            SwingUtilities.invokeAndWait(() -> {
-                this.changeGameState(gameState);
-                this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                this.frame.setLocationRelativeTo(null);
-                this.start();
-            });
-        } catch (InterruptedException e) {
-            Logger.getLogger(DrawViewImpl.class.getName()).
-            log(Level.SEVERE, "An InterruptedException occurred: ", e);
-        } catch (InvocationTargetException e) {
-            Logger.getLogger(DrawViewImpl.class.getName()).
-            log(Level.SEVERE, "An InvocationTargetException occurred: ", e.getCause());
-        }
+    public DrawViewImpl(final GameState gameState, final Player player, final EnemyManager enemyManager, 
+        final WeaponManager weaponManager, final ExperienceManager experienceManager) {
+        this.titlePanel = new TitlePanel(this.sw / PROPORTION, this.sh / PROPORTION, this);
+        this.optionPanel = new OptionPanel(this.sw / PROPORTION, this.sh / PROPORTION, this);
+        this.gamePanel = new GamePanel(this.sw / PROPORTION, this.sh / PROPORTION, 
+        player, enemyManager, weaponManager, experienceManager);
+        testPanel = new TestPanel(this.sw / PROPORTION, this.sh / PROPORTION);
+        this.changeGameState(gameState);
+        this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.frame.setLocationRelativeTo(null);
+        this.start();
     }
 
     @Override
@@ -57,16 +62,16 @@ public final class DrawViewImpl implements DrawView {
             this.currentGameState = gameState;
             switch (currentGameState) {
                 case TITLESTATE -> {
-                    this.currentPanel = new TitlePanel(this.sw / PROPORTION, this.sh / PROPORTION, this);
+                    this.currentPanel = titlePanel;
                 }
                 case TITLEOPTIONSTATE, PAUSESTATE -> {
-                    this.currentPanel = new OptionPanel(this.sw / PROPORTION, this.sh / PROPORTION, this);
+                    this.currentPanel = optionPanel;
                 }
                 case PLAYSTATE -> {
-                    this.currentPanel = new GamePanel(this.sw / PROPORTION, this.sh / PROPORTION);
+                    this.currentPanel = gamePanel;
                 }
                 case TESTSTATE -> {
-                    this.currentPanel = new TestPanel(this.sw / PROPORTION, this.sh / PROPORTION);
+                    this.currentPanel = testPanel;
                 }
                 default -> throw new IllegalArgumentException();
             }
@@ -82,17 +87,19 @@ public final class DrawViewImpl implements DrawView {
             this.frame.pack();
         });
     }
-    /**
-     *  @return the current gameState.
-     */
+    @Override
     public GameState getCurrentGameState() {
         return this.currentGameState;
     }
-    /**
-     *  @return the current Panel.
-     */
-    public MyPanel getCurrentPanel() {
-        return this.currentPanel;
+    @Override
+    public void repaint() {
+        this.currentPanel.repaint();
     }
+    // /**
+    //  *  @return the current Panel.
+    //  */
+    // private MyPanel getCurrentPanel() {
+    //     return this.currentPanel;
+    // }
 } 
 

@@ -7,8 +7,8 @@ import java.awt.Color;
  * 
  */
 public class Player extends Entity {
-
-    private String direction;
+    private Direction direction;
+    private int xp;
     /**
      * @param x
      * @param y
@@ -19,20 +19,33 @@ public class Player extends Entity {
      */
     public Player(final int x, final int y, final int maxHealth, final int health, final int speed, final int size) {
         super(x, y, maxHealth, health, speed, size);
-        this.direction = "UP";
+        this.direction = Direction.UP;
     }
     /**
      * @return the facing direction of the player.
      */
-    public String getDirection() {
-        return direction;
+    public Direction getDirection() {
+        return this.direction;
+    }
+    /**
+     * @return the current experience value of the player.
+     */
+    public int getXP() {
+        return this.xp;
     }
     /**
      * Sets the facing direction of the player.
      * @param direction
      */
-    public void setDirection(final String direction) {
+    public void setDirection(final Direction direction) {
         this.direction = direction;
+    }
+    /**
+     * Adds to the player experience count.
+     * @param xp
+     */
+    public void addXp(final int xp) {
+        this.xp += xp;
     }
     /**
      * Updates the direction of the player.
@@ -40,16 +53,16 @@ public class Player extends Entity {
     @Override
     public void update() {
        switch (direction) {
-            case "UP":
+            case Direction.UP:
                 //setY(getY() - getSpeed());
                 break;
-            case "DOWN":
+            case Direction.DOWN:
                 //setY(getY() + getSpeed());
                 break;
-            case "LEFT":
+            case Direction.LEFT:
                 //setX(getX() - getSpeed());
                 break;
-            case "RIGHT":
+            case Direction.RIGHT:
                 //setX(getX() + getSpeed());
                 break;
             default:

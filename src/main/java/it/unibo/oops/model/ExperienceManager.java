@@ -3,23 +3,27 @@ package it.unibo.oops.model;
 import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.List;
+
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 /**
  * 
  */
+@SuppressFBWarnings(value = {"EI2"}, 
+justification = "To give the player xp it needs to be externally mutable.")
 public class ExperienceManager {
     private final List<ExperienceOrb> orbs;
-    @SuppressWarnings("unused") // TEMPORARY
-    private final double fps;
+    // private final double fps; TEMPORARLY COMMENTED to avoid spotbugs until it is actually used. 
     private final Player player;
-    @SuppressWarnings("unused") // TEMPORARY
-    private int playerXp;
     /**
-     * @param fps
+     * Possibly supposed to be in player
+     */
+    //private int playerXp;
+    /**
      * @param player
      */
-    public ExperienceManager(final double fps, final Player player) {
+    public ExperienceManager(/*final double fps,*/final Player player) {
         orbs = new ArrayList<>();
-        this.fps = fps;
+        /*this.fps = fps;*/
         this.player = player;
     }
     /**
@@ -30,7 +34,7 @@ public class ExperienceManager {
             if (Math.abs(player.getX() - orb.getX()) <= 10 
                 && Math.abs(player.getY() - orb.getY()) <= 10) {
                 orbs.remove(orb);
-                playerXp += orb.getXP();
+                this.player.addXp(orb.getXP());
             }
         }
     }

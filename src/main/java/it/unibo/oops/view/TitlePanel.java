@@ -10,6 +10,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
 
 import it.unibo.oops.controller.gamestate.GameState;
 /**
@@ -45,7 +46,9 @@ public class TitlePanel extends MyPanel {
 
         newGameButton.addActionListener(e -> this.drawView.changeGameState(GameState.PLAYSTATE));
         settingsButton.addActionListener(e -> this.drawView.changeGameState(GameState.TITLEOPTIONSTATE));
-        quitButton.addActionListener(e -> System.exit(0));
+        quitButton.addActionListener(e -> {
+            SwingUtilities.getWindowAncestor(quitButton).dispose();
+        });
 
         buttonPanel.add(newGameButton);
         buttonPanel.add(loadGameButton);

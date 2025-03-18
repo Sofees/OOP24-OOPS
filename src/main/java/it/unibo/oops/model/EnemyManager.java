@@ -1,11 +1,17 @@
 package it.unibo.oops.model;
 
 import java.util.List;
+
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 import java.awt.Graphics2D;
 import java.util.ArrayList;
 /**
  * 
  */
+@SuppressFBWarnings(value = {"EI2"}, 
+justification = "To spawn enemies around the player, its position is needed, " 
+        + "and while it's not necessary for the player to be externally mutable for this class, it has to be for others.")
 public class EnemyManager {
     private static final int WAVE_SIZE = 8;
     private static final int ENEMY_CAP = 1000;
@@ -25,15 +31,15 @@ public class EnemyManager {
         if (enemyList.size() >= WAVE_SIZE) {
             for (int i = 0; i < WAVE_SIZE; i++) {
                 if (!enemyList.get(i).isPositioned()) {
-                    final double angle = 2 * Math.PI * i / WAVE_SIZE; // Divide circle into equal parts
-                    final int x = player.getX() + player.getSize() / 2
-                    + (int) (PLAYER_DISTANCE * Math.cos(angle) - enemyList.get(i).getSize() / 2);
-                    final int y = player.getY() + player.getSize() / 2
-                    + (int) (PLAYER_DISTANCE * Math.sin(angle) - enemyList.get(i).getSize() / 2);
-                    enemyList.get(i).setX(x);
-                    enemyList.get(i).setY(y);
+                    final double angle = 2 * Math.PI * i / WAVE_SIZE;
+                    final double x = player.getX() + player.getSize() / 2
+                    + PLAYER_DISTANCE * Math.cos(angle) - (double) enemyList.get(i).getSize() / 2;
+                    final double y = player.getY() + player.getSize() / 2
+                    + PLAYER_DISTANCE * Math.sin(angle) - (double) enemyList.get(i).getSize() / 2;
+                    enemyList.get(i).setX((int) x);
+                    enemyList.get(i).setY((int) y);
                     enemyList.get(i).setPosition(true);
-                    enemyList.get(i).setSpeed(0);
+                    enemyList.get(i).setSpeed(1);
                 }
                 enemyList.get(i).update();
             }

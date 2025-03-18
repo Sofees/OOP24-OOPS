@@ -15,4 +15,12 @@ public interface DrawView {
      * @param gameState 
      */
     void changeGameState(GameState gameState);
+    /**
+     *  @return the current gameState.
+     */
+    GameState getCurrentGameState();
+    /**
+     *  Repaints the current Panel.
+     */
+    void repaint();
 }
