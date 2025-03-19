@@ -1,9 +1,12 @@
 package it.unibo.oops.view;
 
+import it.unibo.oops.controller.InputHandler;
+import java.awt.event.KeyListener;
 import it.unibo.oops.controller.gamestate.GameState;
 import it.unibo.oops.model.EnemyManager;
 import it.unibo.oops.model.ExperienceManager;
 import it.unibo.oops.model.Player;
+
 import it.unibo.oops.model.WeaponManager;
 
 import javax.swing.JFrame;
@@ -101,5 +104,14 @@ public final class DrawViewImpl implements DrawView {
     // private MyPanel getCurrentPanel() {
     //     return this.currentPanel;
     // }
-} 
+    public void addKeyListener(KeyListener listener) {
+        frame.addKeyListener(listener);
+    }
+    
+    public void setFocusable(boolean focusable) {
+        frame.setFocusable(focusable);
+        frame.requestFocusInWindow();
+    
+    }
+}
 
