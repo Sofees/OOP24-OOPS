@@ -1,9 +1,13 @@
 package it.unibo.oops.view;
 
+import it.unibo.oops.controller.gamestate.GameState;
+import it.unibo.oops.model.EnemyManager;
+import it.unibo.oops.model.ExperienceManager;
+import it.unibo.oops.model.Player;
+import it.unibo.oops.model.WeaponManager;
+
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
-
-import it.unibo.oops.controller.gamestate.GameState;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -19,17 +23,30 @@ public final class DrawViewImpl implements DrawView {
     private final Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
     private final int sw = (int) d.getWidth();
     private final int sh = (int) d.getHeight();
-    private GameState currentGameState = GameState.TITLESTATE;
+    private GameState currentGameState;
+    private MyPanel currentPanel;
+    private final TitlePanel titlePanel;
+    private final OptionPanel optionPanel;
+    private final GamePanel gamePanel;
+    private final TestPanel testPanel;
     /**
      * @param gameState
+     * @param player
+     * @param enemyManager
+     * @param weaponManager
+     * @param experienceManager
      */
-    public DrawViewImpl(final GameState gameState) {
-        SwingUtilities.invokeLater(() -> {
-            this.changeGameState(gameState);
-            this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            this.frame.setLocationRelativeTo(null);
-            this.start();
-        });
+    public DrawViewImpl(final GameState gameState, final Player player, final EnemyManager enemyManager, 
+        final WeaponManager weaponManager, final ExperienceManager experienceManager) {
+        this.titlePanel = new TitlePanel(this.sw / PROPORTION, this.sh / PROPORTION, this);
+        this.optionPanel = new OptionPanel(this.sw / PROPORTION, this.sh / PROPORTION, this);
+        this.gamePanel = new GamePanel(this.sw / PROPORTION, this.sh / PROPORTION, 
+        player, enemyManager, weaponManager, experienceManager);
+        testPanel = new TestPanel(this.sw / PROPORTION, this.sh / PROPORTION);
+        this.changeGameState(gameState);
+        this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.frame.setLocationRelativeTo(null);
+        this.start();
     }
 
     @Override
@@ -44,43 +61,45 @@ public final class DrawViewImpl implements DrawView {
         if (currentGameState != gameState) {
             this.currentGameState = gameState;
             switch (currentGameState) {
-                case TITLESTATE -> setTitleState();
-                case TITLEOPTIONSTATE, PAUSESTATE -> setOptionState();
-                case PLAYSTATE -> setPlayState();
-                case TESTSTATE -> setTestState();
+                case TITLESTATE -> {
+                    this.currentPanel = titlePanel;
+                }
+                case TITLEOPTIONSTATE, PAUSESTATE -> {
+                    this.currentPanel = optionPanel;
+                }
+                case PLAYSTATE -> {
+                    this.currentPanel = gamePanel;
+                }
+                case TESTSTATE -> {
+                    this.currentPanel = testPanel;
+                }
                 default -> throw new IllegalArgumentException();
             }
+            this.setState();
         }
     }
-    private void setTitleState() {
-        SwingUtilities.invokeLater(() -> {
-            this.frame.setContentPane(new TitlePanel(sw / PROPORTION, sh / PROPORTION));
-            this.frame.pack();
-        });
-    }
-    private void setOptionState() {
-        SwingUtilities.invokeLater(() -> {
-            //GamePanel da sostituire con un OptionPanel
-            this.frame.setContentPane(new GamePanel(sw / PROPORTION, sh / PROPORTION));
-            this.frame.pack();
-        });
-    }
-    private void setPlayState() {
-        SwingUtilities.invokeLater(() -> {
-            this.frame.setContentPane(new GamePanel(sw / PROPORTION, sh / PROPORTION));
-            this.frame.pack();
-        });
-    }
-    private void setTestState() {
-        SwingUtilities.invokeLater(() -> {
-            this.frame.setContentPane(new TestPanel(sw / PROPORTION, sh / PROPORTION));
-            this.frame.pack();
-        });
-    }
     /**
-     *  @return the current gameState.
-     */
-    public GameState getCurrentGameState() {
-        return currentGameState;
+    *  Sets the current panel on the screen.
+    */
+    private void setState() {
+        SwingUtilities.invokeLater(() -> {
+            this.frame.setContentPane(this.currentPanel);
+            this.frame.pack();
+        });
     }
-}
+    @Override
+    public GameState getCurrentGameState() {
+        return this.currentGameState;
+    }
+    @Override
+    public void repaint() {
+        this.currentPanel.repaint();
+    }
+    // /**
+    //  *  @return the current Panel.
+    //  */
+    // private MyPanel getCurrentPanel() {
+    //     return this.currentPanel;
+    // }
+} 
+
