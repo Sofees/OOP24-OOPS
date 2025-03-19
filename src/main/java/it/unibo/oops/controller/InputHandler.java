@@ -1,0 +1,40 @@
+package it.unibo.oops.controller;
+
+import it.unibo.oops.model.Player;
+import it.unibo.oops.model.Direction;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+
+/**
+ * Class that handles the key events for controlling the player.
+ * 
+ */
+public class InputHandler extends KeyAdapter {
+    private final Player player;
+
+    /**
+     * Constructor that initializes the InputHandler with the player.
+     * @param player the player to control
+     */
+    public InputHandler(final Player player) {
+        this.player = player;
+    }
+
+    /**
+     * Handles the key press events to change the player's direction.
+     * @param e the KeyEvent that contains the key code
+     */
+    @Override
+    public void keyPressed(final KeyEvent e) {
+        final int key = e.getKeyCode();
+        if (key == KeyEvent.VK_W) {
+            player.setDirection(Direction.UP);
+        } else if (key == KeyEvent.VK_S) {
+            player.setDirection(Direction.DOWN);
+        } else if (key == KeyEvent.VK_A) {
+            player.setDirection(Direction.LEFT);
+        } else if (key == KeyEvent.VK_D) {
+            player.setDirection(Direction.RIGHT);
+        }
+    }
+}

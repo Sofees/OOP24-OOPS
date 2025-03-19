@@ -54,16 +54,16 @@ public class Player extends Entity {
     public void update() {
        switch (direction) {
             case Direction.UP:
-                //setY(getY() - getSpeed());
+                setY(getY() - getSpeed());
                 break;
             case Direction.DOWN:
-                //setY(getY() + getSpeed());
+                setY(getY() + getSpeed());
                 break;
             case Direction.LEFT:
-                //setX(getX() - getSpeed());
+                setX(getX() - getSpeed());
                 break;
             case Direction.RIGHT:
-                //setX(getX() + getSpeed());
+                setX(getX() + getSpeed());
                 break;
             default:
                 throw new IllegalArgumentException();

@@ -42,6 +42,9 @@ public class GameThreadImpl implements Runnable, GameThread {
      */
     public GameThreadImpl() {
         this.startThread();
+        final InputHandler inputHandler = new InputHandler(player);
+        window.addKeyListener(inputHandler);
+        window.setFocusable(true);
     }
     /**
      * Starts the gameThread.
