@@ -1,6 +1,5 @@
 package it.unibo.oops.view;
 
-import it.unibo.oops.controller.InputHandler;
 import java.awt.event.KeyListener;
 import it.unibo.oops.controller.gamestate.GameState;
 import it.unibo.oops.model.EnemyManager;
@@ -104,14 +103,22 @@ public final class DrawViewImpl implements DrawView {
     // private MyPanel getCurrentPanel() {
     //     return this.currentPanel;
     // }
-    public void addKeyListener(KeyListener listener) {
+    /**
+     * Adds a key listener to the frame.
+     * 
+     * @param listener the key listener to add
+     */
+    public void addKeyListener(final KeyListener listener) {
         frame.addKeyListener(listener);
     }
-    
-    public void setFocusable(boolean focusable) {
+
+    /**
+     * Sets whether the frame is focusable.
+     * 
+     * @param focusable true if the frame should be focusable
+     */
+    public void setFocusable(final boolean focusable) {
         frame.setFocusable(focusable);
         frame.requestFocusInWindow();
-    
     }
 }
-
