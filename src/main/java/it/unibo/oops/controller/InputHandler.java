@@ -5,10 +5,14 @@ import it.unibo.oops.model.Direction;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 /**
  * Class that handles the key events for controlling the player.
  * 
  */
+@SuppressFBWarnings(value = {"EI2"}, 
+justification = "To change the player's position it has to be an externally mutable class.")
 public class InputHandler extends KeyAdapter {
     private final Player player;
 
