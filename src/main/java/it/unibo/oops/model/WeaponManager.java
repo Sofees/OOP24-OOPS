@@ -15,7 +15,6 @@ public class WeaponManager {
     private final List<Weapon> weapons;
     private final Player player;
     /**
-     * @param fps
      * @param player
      */
     public WeaponManager(final Player player) {
