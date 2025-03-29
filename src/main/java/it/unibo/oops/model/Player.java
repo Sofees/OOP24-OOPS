@@ -52,24 +52,57 @@ public class Player extends Entity {
      */
     @Override
     public void update() {
+        final int speed = getSpeed(); // Declare speed as final
+        int dx = 0;
+        int dy = 0;
+        boolean diagonal = false;
+
         switch (direction) {
             case UP:
-                setY(getY() - getSpeed());
+                dy = -speed;
                 break;
             case DOWN:
-                setY(getY() + getSpeed());
+                dy = speed;
                 break;
             case LEFT:
-                setX(getX() - getSpeed());
+                dx = -speed;
                 break;
             case RIGHT:
-                setX(getX() + getSpeed());
+                dx = speed;
+                break;
+            case UPLEFT:
+                dx = -speed;
+                dy = -speed;
+                diagonal = true;
+                break;
+            case UPRIGHT:
+                dx = speed;
+                dy = -speed;
+                diagonal = true;
+                break;
+            case DOWNLEFT:
+                dx = -speed;
+                dy = speed;
+                diagonal = true;
+                break;
+            case DOWNRIGHT:
+                dx = speed;
+                dy = speed;
+                diagonal = true;
                 break;
             case NONE:
                 return;
             default:
                 throw new IllegalArgumentException();
         }
+
+        if (diagonal) {
+            dx /= Math.sqrt(2);
+            dy /= Math.sqrt(2);
+        }
+
+        setX(getX() + dx);
+        setY(getY() + dy);
     }
     /**
      * Draws the player.
